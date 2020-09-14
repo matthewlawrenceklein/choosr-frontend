@@ -4,6 +4,7 @@ import "firebase/auth";
 import "firebase/firestore"
 import { connect } from 'react-redux'
 import { setUser } from '../actions/index'
+import { loggedIn } from '../actions/index'
 
 class Login extends Component {
 
@@ -29,9 +30,12 @@ handleGoogleSignIn = () => {
                 if (matchUserList.length === 0){
                     db.collection("users").add(userObj)
                     this.props.setUser(userObj)
+                    this.props.loggedIn(true)
 
                 } else {
                     this.props.setUser(matchUserList[0])
+                    this.props.loggedIn(true)
+
                 }
         });
       }).catch(function(error) {

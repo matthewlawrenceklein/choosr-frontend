@@ -1,14 +1,21 @@
 import React from 'react';
 import './App.css';
 import Login from './components/Login'
+import { connect } from 'react-redux'
 
-
-function App() {
+function App(props) {
   return (
     <div className="App">
-      < Login />
+      { props.loggedIn ? <h3>hey</h3>: < Login />}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+      userObj: state.userObj,
+      loggedIn: state.loggedIn
+  }
+}
+
+export default connect(mapStateToProps, null)(App)

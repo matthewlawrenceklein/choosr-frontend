@@ -4,3 +4,10 @@ export const setUser = (userObj) => {
       userObj : userObj 
     }
 }
+
+export const loggedIn = (value) => {
+    return {
+      type: 'LOGGED_IN',
+      loggedIn : value 
+    }
+}
