@@ -8,22 +8,32 @@ import { setUser } from '../actions/index'
 class Login extends Component {
 
 handleGoogleSignIn = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
+    const db = firebase.firestore();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    let matchUserList = []
+    firebase.auth().signInWithPopup(provider).then((result) => {
         var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        const { photoURL, email, displayName } = result.user 
-
-        const db = firebase.firestore();
-        db.collection("users").add({
-            displayName: displayName,
-            email: email,
-            photoURL: photoURL
-        })
+        const { photoURL, email, displayName } = result.user
         
+        const userObj = {
+            photoURL : photoURL,
+            email : email, 
+            displayName : displayName
+        }
+        
+        db.collection("users").where("email", "==", userObj.email)
+        .get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                matchUserList.push(doc.data())
+            });
+                if (matchUserList.length === 0){
+                    db.collection("users").add(userObj)
+                    this.props.setUser(userObj)
+
+                } else {
+                    this.props.setUser(matchUserList[0])
+                }
+        });
       }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -61,35 +71,24 @@ handleGitHubSignIn = () => {
       });    
 }
 
-readData = () => {
-    const db = firebase.firestore();
-    db.collection("users").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // console.log(`${doc.get('email')}`);
-            // console.log(`${doc.get('photoURL')}`);
-        });
-    });
-    db.collection("users").get()
-        .then(querySnapshot => console.log(querySnapshot))
-        
-}
+
     render() {
         return (
             <div>
                 <button onClick={ this.handleGoogleSignIn }>login with google</button>
                 <button onClick={ this.handleGitHubSignIn }>login with github</button>
-                <button onClick={ this.readData }>test</button>
             </div>
         );
     }
 }
 const mapDispatchToProps = {
     setUser,
+    loggedIn
   }
 
 const mapStateToProps = (state) => {
     return {
-        userId: state.userId 
+        userObj: state.userObj
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

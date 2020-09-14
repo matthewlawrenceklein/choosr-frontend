@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import userId from './userId'
+import userObj from './userObj'
 
 
 export default combineReducers({
-    userId
+    userObj
    })
  
