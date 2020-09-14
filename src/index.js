@@ -6,6 +6,10 @@ import * as serviceWorker from './serviceWorker';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from '../src/reducers/index'
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAal_rNN5Ym4umMAEz2BIhzWq4MRbnM6yY",
@@ -19,11 +23,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

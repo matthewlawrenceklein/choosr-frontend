@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore"
+import { connect } from 'react-redux'
+import { setUser } from '../actions/index'
 
 class Login extends Component {
 
@@ -14,10 +17,13 @@ handleGoogleSignIn = () => {
         var user = result.user;
         const { photoURL, email, displayName } = result.user 
 
-        console.log(displayName)
-        console.log(email)
-        console.log(photoURL)
-        // ...
+        const db = firebase.firestore();
+        db.collection("users").add({
+            displayName: displayName,
+            email: email,
+            photoURL: photoURL
+        })
+        
       }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -28,6 +34,7 @@ handleGoogleSignIn = () => {
         var credential = error.credential;
         // ...
       });
+
  }
 
 handleGitHubSignIn = () => {
@@ -53,14 +60,36 @@ handleGitHubSignIn = () => {
         // ...
       });    
 }
+
+readData = () => {
+    const db = firebase.firestore();
+    db.collection("users").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // console.log(`${doc.get('email')}`);
+            // console.log(`${doc.get('photoURL')}`);
+        });
+    });
+    db.collection("users").get()
+        .then(querySnapshot => console.log(querySnapshot))
+        
+}
     render() {
         return (
             <div>
                 <button onClick={ this.handleGoogleSignIn }>login with google</button>
                 <button onClick={ this.handleGitHubSignIn }>login with github</button>
+                <button onClick={ this.readData }>test</button>
             </div>
         );
     }
 }
+const mapDispatchToProps = {
+    setUser,
+  }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        userId: state.userId 
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
