@@ -106,3 +106,7 @@
   color:black;
   opacity: 1; /* Firefox */
 }
+
+#chooser-input-title{
+  margin: 15px;
+}

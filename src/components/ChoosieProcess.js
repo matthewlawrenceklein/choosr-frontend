@@ -39,20 +39,20 @@ class ChoosieProcess extends Component {
                 < NavBar />
                 { this.props.setCategory === 'cuisine' ? 
                 <div>
-                <PlacesAutocomplete
+                    <PlacesAutocomplete
                     value={this.state.address}
                     onChange={this.handleChange}
                     onSelect={this.handleSelect}
-                >
+                    >
                     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
                         <input
                         {...getInputProps({
                             placeholder: 'Search Places ...',
-                            className: 'location-search-input',
+                            className: 'choosr-input',
                         })}
                         />
-                        <div className="autocomplete-dropdown-container">
+                        <div className="autocomplete-dropdown-container choosr-input">
                         {loading && <div>Loading...</div>}
                         {suggestions.map(suggestion => {
                             const className = suggestion.active
@@ -60,8 +60,8 @@ class ChoosieProcess extends Component {
                             : 'suggestion-item';
                             // inline style for demonstration purpose
                             const style = suggestion.active
-                            ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                            : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                            ? { backgroundColor: 'transparent', cursor: 'pointer' }
+                            : { backgroundColor: 'transparent', cursor: 'pointer' };
                             return (
                             <div
                                 {...getSuggestionItemProps(suggestion, {
@@ -80,7 +80,7 @@ class ChoosieProcess extends Component {
               </div>
                 
                 : null  }
-                    <h3> How Many Choosers?</h3>
+                    <h3 id="chooser-input-title"> How Many Choosers?</h3>
                     <input className='chooser-num-select' type='number' max='4' onChange={this.handleNum}></input>
                     <br></br>
 
