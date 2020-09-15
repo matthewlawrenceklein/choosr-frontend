@@ -5,6 +5,7 @@ import NavBar from './components/NavBar'
 import Dash from './components/Dash'
 import Footer from './components/Footer'
 import ChoosieProcess from './components/ChoosieProcess'
+import ChoosieStart from './components/ChoosieStart'
 import { connect } from 'react-redux'
 import { Route, Switch } from "react-router-dom";
 
@@ -30,9 +31,14 @@ function App(props) {
           </div>
           }         
         </Route>
-        <Route path="/choosie">
+        <Route exact path="/choosie">
           <ChoosieProcess />
         </Route>
+
+        <Route exact path="/choosie/start">
+          <ChoosieStart />
+        </Route>  
+
       </Switch>
     </div>
   );
