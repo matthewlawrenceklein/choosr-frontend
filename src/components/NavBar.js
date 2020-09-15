@@ -21,6 +21,7 @@ class NavBar extends Component {
                         <Col> <DoorClosed className='nav-icon'/> </Col>
                     </Row>
                 </Container>
+                <hr></hr>
             </div>
         );
     }
