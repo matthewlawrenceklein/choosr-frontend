@@ -7,7 +7,6 @@ import { setUser } from '../actions/index'
 import { loggedIn } from '../actions/index'
 import { Container } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
 
 
 class Login extends Component {
