@@ -1,17 +1,30 @@
-.Body{
-  background: rgb(238,174,202);
-background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,0.2861519607843137) 100%);
-}
 
 .App {
   text-align: center;
   
 }
 
+
+
 .nav-icon {
   font-size: 60px;
   margin: 15px;
   color: black;
+}
+
+.login{
+  height: 200px;
+  width: 175px;
+  border-radius: 25px;
+  background: goldenrod;
+  box-shadow: 10px 10px 32px -4px rgba(0,0,0,0.63);
+  text-align: center;
+  margin-top: 400px;
+  margin-left: 450px;
+}
+
+.login-item{
+  margin: 10px;
 }
 
 .navbar {
@@ -73,4 +86,23 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,0.2
 
 .choosie-button{
   margin: 50px;
+}
+
+.chooser-input{
+  margin: 15px;
+  padding: 10px;
+  border-radius: 20px;
+  background: transparent;
+  border: none 
+}
+.chooser-num-select{
+  margin: 15px;
+  padding: 10px;
+  border-radius: 20px;
+  background: transparent;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color:black;
+  opacity: 1; /* Firefox */
 }

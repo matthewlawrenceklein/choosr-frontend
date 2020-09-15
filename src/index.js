@@ -10,6 +10,7 @@ import "firebase/firestore";
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from '../src/reducers/index'
+import { BrowserRouter } from 'react-router-dom';
 
 
 const firebaseConfig = {
@@ -32,9 +33,11 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
