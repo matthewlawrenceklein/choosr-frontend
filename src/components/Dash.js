@@ -38,7 +38,7 @@ class Dash extends Component {
                     < ChoosieCard title='Hot New Music' 
                                   image={process.env.PUBLIC_URL + '/music.png'}
                                   buttonText='Discover New Tunes!'
-                                  category='albums'
+                                  category='music'
                     />
                 </div>
             </ReactCardCarousel>

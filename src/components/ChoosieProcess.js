@@ -13,13 +13,46 @@ class ChoosieProcess extends Component {
 
     state = {
         numChoosers : 0,
-        address : ''
+        address : '',
+        movies : [],
+        playlists : []
     }
+
+    // TODO address, movies, + music have to be redux store items. move them there 
+
+    getMovies = () => {
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=6103f090c7736779632b18a2a4abb0bb&language=en-US&page=1')
+            .then(resp => resp.json())
+            .then(resp => {
+                for(let i = 0; i < 4; i++){
+                    this.state.movies.push(resp.results[i])
+                }
+                console.log(this.state.movies)
+            })    
+    }
+
+    getPlaylists = () => {
+        fetch("https://api.spotify.com/v1/browse/featured-playlists?country=US&limit=8", {
+            headers: {
+            Accept: "application/json",
+            Authorization: "Bearer BQCubWVj4YY1ZW7WIlqobKsFUNUpX7jFYaRwlHrNo1vDBncNSd3cOcrUzJYBrVIPq7ccFcUhSzpWHvv5wRH4I7VjJ5HE5rBrx8gPPyF--HPPlOkhIlc-Rnpl9JNcvkS_p9Jv0Ig7AiBmysI",
+            "Content-Type": "application/json"
+  }
+})
+        .then(resp => resp.json())
+        .then(resp => {
+            this.setState({
+                playlists : resp.playlists.items
+            })
+        })
+    }
+
     handleNum = (e) => {
         
         this.setState({
             numChoosers : parseInt(e.target.value)
         })
+        console.log(this.state)
     }
 
     handleChange = address => {
@@ -37,6 +70,8 @@ class ChoosieProcess extends Component {
         return (
             <div className='app'>
                 < NavBar />
+                { this.props.setCategory === 'movies' ? this.getMovies() : null }
+                { this.props.setCategory === 'music' ? this.getPlaylists() : null }
                 { this.props.setCategory === 'cuisine' ? 
                 <div>
                     <PlacesAutocomplete
