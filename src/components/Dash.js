@@ -27,10 +27,18 @@ class Dash extends Component {
                 </div>
 
                 <div className='choosie-card'>
-                    < ChoosieCard title='Classic Cinema' 
+                    < ChoosieCard title='Popular Movies' 
                                   image={process.env.PUBLIC_URL + '/movie.png'}
-                                  buttonText='Watch a Masterpiece!'
+                                  buttonText="Watch What's Popular!"
                                   category='movies'
+                    />
+                </div>
+
+                <div className='choosie-card'>
+                    < ChoosieCard title='Classic Cinema' 
+                                  image={process.env.PUBLIC_URL + '/cinema.png'}
+                                  buttonText='Watch a Masterpiece!'
+                                  category='cinema'
                     />
                 </div>
 

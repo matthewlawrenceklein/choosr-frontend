@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as firebase from "firebase/app";
+import "firebase/firestore"
 import { connect } from 'react-redux'
 import NavBar from './NavBar'
 import Footer from './Footer'
@@ -15,7 +17,8 @@ class ChoosieProcess extends Component {
         numChoosers : 0,
         address : '',
         movies : [],
-        playlists : []
+        playlists : [],
+        classicCinema : []
     }
 
     // TODO address, movies, + music have to be redux store items. move them there 
@@ -29,6 +32,17 @@ class ChoosieProcess extends Component {
                 }
                 console.log(this.state.movies)
             })    
+    }
+
+    getCinema = () => {
+        const db = firebase.firestore();
+        db.collection("classic-movies").get().then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                // console.log(doc.id, " => ", doc.data());
+                this.state.classicCinema.push(doc.data())
+            });
+        });
+        
     }
 
     getPlaylists = () => {
@@ -71,6 +85,7 @@ class ChoosieProcess extends Component {
             <div className='app'>
                 < NavBar />
                 { this.props.setCategory === 'movies' ? this.getMovies() : null }
+                { this.props.setCategory === 'cinema' ? this.getCinema() : null }
                 { this.props.setCategory === 'music' ? this.getPlaylists() : null }
                 { this.props.setCategory === 'cuisine' ? 
                 <div>
