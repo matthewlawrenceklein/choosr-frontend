@@ -39,3 +39,17 @@ export const setPlaylists = (playlists) => {
     setPlaylists : playlists 
   }
 }
+
+export const setLatLon = (latLon) => {
+  return {
+    type: 'SET_LATLON',
+    setLatLon : latLon
+  }
+}
+
+export const setChooserNames = (chooserNames) => {
+  return {
+    type: 'SET_CHOOSER_NAMES',
+    setChooserNames : chooserNames
+  }
+}

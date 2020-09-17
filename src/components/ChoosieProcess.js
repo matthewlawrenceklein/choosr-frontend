@@ -13,13 +13,15 @@ import PlacesAutocomplete, {
 import { setMovies } from '../actions/index'
 import { setCinema } from '../actions/index'
 import { setPlaylists } from '../actions/index'
+import { setLatLon } from '../actions/index'
+import { setChooserNames } from '../actions/index'
 
 class ChoosieProcess extends Component {
 
     state = {
         numChoosers : 0,
+        chooserNames : {}, 
         address : '',
-        playlists : [],
     }
 
     componentDidMount(){
@@ -78,8 +80,6 @@ class ChoosieProcess extends Component {
             console.log(resp)
         })
 
-
-
         fetch("https://api.spotify.com/v1/browse/featured-playlists?country=United%20States&limit=8", {
          headers: {
             Accept: "application/json",
@@ -94,11 +94,9 @@ class ChoosieProcess extends Component {
     }
 
     handleNum = (e) => {
-        
         this.setState({
             numChoosers : parseInt(e.target.value)
         })
-        console.log(this.state)
     }
 
     handleChange = address => {
@@ -108,9 +106,23 @@ class ChoosieProcess extends Component {
       handleSelect = address => {
         geocodeByAddress(address)
           .then(results => getLatLng(results[0]))
-          .then(latLng => console.log('Success', latLng))
+          .then(latLng => {
+              console.log('Success', latLng)
+              this.props.setLatLon(latLng)
+            })
           .catch(error => console.error('Error', error));
       };
+    
+    handleChangeName = (e) => {
+        this.setState({
+           chooserNames : {...this.state.chooserNames, [e.target.id] : e.target.value} 
+        })
+     }
+
+    handleChooserNames = () => {
+        let nameArray = Object.values(this.state.chooserNames).filter(name => name.length > 0)
+        this.props.setChooserNames(nameArray)
+    }  
  
     render() {
         return (
@@ -166,10 +178,10 @@ class ChoosieProcess extends Component {
 
                 { this.state.numChoosers === 1 ?
                  <div>
-                     <input className='chooser-input'type='text' placeholder='Enter Chooser 1 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='1' className='chooser-input'type='text' placeholder='Enter Chooser 1 Name'></input> 
                     <br></br>
                      <Link to="/choosie/start">
-                        <ArrowRightCircle className='nav-icon'/>
+                        <ArrowRightCircle className='nav-icon' onClick={ this.handleChooserNames }/>
                     </Link>
                  </div>
                  : 
@@ -177,12 +189,12 @@ class ChoosieProcess extends Component {
 
                 { this.state.numChoosers === 2 ?
                  <div>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 1 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='1' className='chooser-input' type='text' placeholder='Enter Chooser 1 Name'></input> 
                      <br></br>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 2 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='2' className='chooser-input' type='text' placeholder='Enter Chooser 2 Name'></input> 
                      <br></br>
                      <Link to="/choosie/start">
-                        <ArrowRightCircle className='nav-icon'/>
+                        <ArrowRightCircle className='nav-icon' onClick={ this.handleChooserNames }/>
                     </Link>
                  </div>
                  : 
@@ -190,14 +202,14 @@ class ChoosieProcess extends Component {
 
                 { this.state.numChoosers === 3 ?
                  <div>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 1 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='1' className='chooser-input' type='text' placeholder='Enter Chooser 1 Name'></input> 
                      <br></br>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 2 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='2' className='chooser-input' type='text' placeholder='Enter Chooser 2 Name'></input> 
                      <br></br>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 3 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='3' className='chooser-input' type='text' placeholder='Enter Chooser 3 Name'></input> 
                      <br></br>
                      <Link to="/choosie/start">
-                        <ArrowRightCircle className='nav-icon'/>
+                        <ArrowRightCircle className='nav-icon' onClick={ this.handleChooserNames }/>
                     </Link>
                  </div>
                  : 
@@ -205,16 +217,16 @@ class ChoosieProcess extends Component {
 
                 { this.state.numChoosers === 4 ?
                  <div>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 1 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='1' className='chooser-input' type='text' placeholder='Enter Chooser 1 Name'></input> 
                      <br></br>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 2 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='2' className='chooser-input' type='text' placeholder='Enter Chooser 2 Name'></input> 
                      <br></br>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 3 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='3' className='chooser-input' type='text' placeholder='Enter Chooser 3 Name'></input> 
                      <br></br>
-                     <input className='chooser-input' type='text' placeholder='Enter Chooser 4 Name'></input> 
+                     <input onChange={ this.handleChangeName } id='4' className='chooser-input' type='text' placeholder='Enter Chooser 4 Name'></input> 
                      <br></br>
                      <Link to="/choosie/start">
-                        <ArrowRightCircle className='nav-icon'/>
+                        <ArrowRightCircle className='nav-icon'onClick={ this.handleChooserNames } />
                     </Link>
                  </div>
                  : 
@@ -236,7 +248,9 @@ const mapStateToProps = (state) => {
   const mapDispatchToProps = {
     setMovies,
     setCinema,
-    setPlaylists
+    setPlaylists,
+    setLatLon,
+    setChooserNames
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChoosieProcess)
