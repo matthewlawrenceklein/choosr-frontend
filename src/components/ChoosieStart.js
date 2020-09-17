@@ -3,48 +3,11 @@ import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import MovieItem from './choiceItems/MovieItem'
 import CinemaItem from './choiceItems/CinemaItem'
+import CuisineItem from './choiceItems/CuisineItem'
 import NavBar from './NavBar'
 import Footer from './Footer'
 
-const cuisines = {
-    "Vietnamese" : 99, 
-    "Vegetarian" : 308, 
-    "Turkish" : 142, 
-    "Thai" : 95, 
-    "Tex-Mex": 150, 
-    "Sushi" : 177, 
-    "Steak" : 141, 
-    "Spanish" : 89, 
-    "Southern" : 471, 
-    "South American" : 972, 
-    "Seafood" : 83, 
-    "Sandwich" : 304, 
-    "Salad" : 998, 
-    "Ramen" : 320,
-    "Pub Food" : 983,
-    "Pizza" : 82
-}
-
-
 class ChoosieStart extends Component {
-
-    componentDidMount(){
-        switch (this.props.setCategory) {
-            case 'movies':
-                this.renderMovies()
-                break;
-            case 'cuisine': 
-                break
-            case 'music':
-                // this.getPlaylists()
-                break
-            case 'cinema': 
-                break 
-            default:
-                break;
-        }
-    }
-
 
     renderMovies = () => {
         return this.props.movies.map( movie => {
@@ -57,19 +20,7 @@ class ChoosieStart extends Component {
     }
 
     renderCinema = () => {
-
-        function shuffle(a) {
-            var j, x, i;
-            for (i = a.length - 1; i > 0; i--) {
-                j = Math.floor(Math.random() * (i + 1));
-                x = a[i];
-                a[i] = a[j];
-                a[j] = x;
-            }
-            return a;
-        }
-
-        shuffle(this.props.cinema)
+        this.shuffle(this.props.cinema)
 
             return (
                 <div className='App'>
@@ -85,16 +36,88 @@ class ChoosieStart extends Component {
             )
     }
 
+    renderCuisines = () => {
+      
+        const cuisines = [
+             {
+                name : 'Vietnamese', 
+                id : 99,
+                image : ''
+            }, 
+           {
+               name : 'Vegetarian', 
+               id:  308,
+               image : ''
+            },
+            {
+                name : 'Turkish',
+                id : 142,
+                image : ''
+            }, 
+            {
+                name : 'Thai',
+                id : 95,
+                image : ''
+            },
+            {
+                name : 'Tex-Mex',
+                id: 150,
+                image : '' 
+            },
+            {
+                name : "Sushi",
+                id :177, 
+                image : ''
+            },
+            {
+                name : 'Steak',
+                id : 141, 
+                image : ''
+            },
+            {
+                name : 'Spanish',
+                id : 89, 
+                image : ''
+            }
+            // "Southern" : 471, 
+            // "South American" : 972, 
+            // "Seafood" : 83, 
+            // "Sandwich" : 304, 
+            // "Salad" : 998, 
+            // "Ramen" : 320,
+            // "Pub Food" : 983,
+            // "Pizza" : 82
+        ]
+        let arrayOfCuisineTypes = this.shuffle(cuisines)
+        return (
+            <div>
+                <CuisineItem title={arrayOfCuisineTypes[0].name}/>
+                <CuisineItem title={arrayOfCuisineTypes[1].name}/>
+                <CuisineItem title={arrayOfCuisineTypes[2].name}/>
+                <CuisineItem title={arrayOfCuisineTypes[3].name}/>
+            </div>
+        )
+    }
      
-
+    shuffle = (a) => {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
+    }
 
     render() {
         return (
             <div>
                 < NavBar />
-                
+
                 { this.props.setCategory === 'movies' ? this.renderMovies() : null }
                 { this.props.setCategory === 'cinema' ? this.renderCinema() : null }
+                { this.props.setCategory === 'cuisine' ? this.renderCuisines() : null }
 
                 <Footer />
             </div>
