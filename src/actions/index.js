@@ -18,3 +18,24 @@ export const setCategory = (category) => {
     setCategory : category 
   }
 }
+
+export const setMovies = (movies) => {
+  return {
+    type: 'SET_MOVIES',
+    setMovies : movies 
+  }
+}
+
+export const setCinema = (cinema) => {
+  return {
+    type: 'SET_CINEMA',
+    setCinema : cinema 
+  }
+}
+
+export const setPlaylists = (playlists) => {
+  return {
+    type: 'SET_PLAYLISTS',
+    setPlaylists : playlists 
+  }
+}

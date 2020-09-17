@@ -10,28 +10,27 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
   } from 'react-places-autocomplete';
+import { setMovies } from '../actions/index'
+import { setCinema } from '../actions/index'
+import { setPlaylists } from '../actions/index'
 
 class ChoosieProcess extends Component {
 
     state = {
         numChoosers : 0,
         address : '',
-        movies : [],
         playlists : [],
-        classicCinema : []
     }
 
     componentDidMount(){
         switch (this.props.setCategory) {
             case 'movies':
-                console.log('blebbo')
                 this.getMovies()
                 break;
             case 'cuisine': 
-                console.log('cuisine')
                 break
             case 'music':
-                console.log('music')
+                // this.getPlaylists()
                 break
             case 'cinema': 
                 this.getCinema()
@@ -39,19 +38,17 @@ class ChoosieProcess extends Component {
             default:
                 break;
         }
-
-
     }
 
-    // TODO address, movies, + music have to be redux store items. move them there 
-
     getMovies = () => {
+        let movies = []
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=6103f090c7736779632b18a2a4abb0bb&language=en-US&page=1')
             .then(resp => resp.json())
             .then(resp => {
                 for(let i = 0; i < 8; i++){
-                    this.state.movies.push(resp.results[i])
+                    movies.push(resp.results[i])
                 }
+                this.props.setMovies(movies)
             })    
     }
 
@@ -62,9 +59,7 @@ class ChoosieProcess extends Component {
             querySnapshot.forEach(doc => {
                 cinema.push(doc.data())
             });
-            this.setState({
-                classicCinema : cinema
-            })
+            this.props.setCinema(cinema)
         });        
     }
 
@@ -85,19 +80,17 @@ class ChoosieProcess extends Component {
 
 
 
-//         fetch("https://api.spotify.com/v1/browse/featured-playlists?country=United%20States&limit=8", {
-//          headers: {
-//             Accept: "application/json",
-//             Authorization: `Bearer ${accessToken}`,
-//             "Content-Type": "application/json"
-//   }
-// })
-//         .then(resp => resp.json())
-//         .then(resp => {
-//             this.setState({
-//                 playlists : resp.playlists.items
-//             })
-//         })
+        fetch("https://api.spotify.com/v1/browse/featured-playlists?country=United%20States&limit=8", {
+         headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
+        }
+        })
+        .then(resp => resp.json())
+        .then(resp => {
+            this.props.setPlaylists(resp.playlists.items)
+        })
     }
 
     handleNum = (e) => {
@@ -135,7 +128,7 @@ class ChoosieProcess extends Component {
                     <div>
                         <input
                         {...getInputProps({
-                            placeholder: 'Search Places ...',
+                            placeholder: 'Your Address...',
                             className: 'choosr-input',
                         })}
                         />
@@ -240,4 +233,10 @@ const mapStateToProps = (state) => {
     }
   }
 
-export default connect(mapStateToProps, null)(ChoosieProcess)
+  const mapDispatchToProps = {
+    setMovies,
+    setCinema,
+    setPlaylists
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChoosieProcess)
