@@ -21,44 +21,83 @@ class ChoosieProcess extends Component {
         classicCinema : []
     }
 
+    componentDidMount(){
+        switch (this.props.setCategory) {
+            case 'movies':
+                console.log('blebbo')
+                this.getMovies()
+                break;
+            case 'cuisine': 
+                console.log('cuisine')
+                break
+            case 'music':
+                console.log('music')
+                break
+            case 'cinema': 
+                this.getCinema()
+                break 
+            default:
+                break;
+        }
+
+
+    }
+
     // TODO address, movies, + music have to be redux store items. move them there 
 
     getMovies = () => {
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=6103f090c7736779632b18a2a4abb0bb&language=en-US&page=1')
             .then(resp => resp.json())
             .then(resp => {
-                for(let i = 0; i < 4; i++){
+                for(let i = 0; i < 8; i++){
                     this.state.movies.push(resp.results[i])
                 }
-                console.log(this.state.movies)
             })    
     }
 
     getCinema = () => {
+        let cinema = []
         const db = firebase.firestore();
         db.collection("classic-movies").get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
-                // console.log(doc.id, " => ", doc.data());
-                this.state.classicCinema.push(doc.data())
+                cinema.push(doc.data())
             });
-        });
-        
+            this.setState({
+                classicCinema : cinema
+            })
+        });        
     }
 
     getPlaylists = () => {
-        fetch("https://api.spotify.com/v1/browse/featured-playlists?country=US&limit=8", {
+        let accessToken = "BQAJLJUiZeWolz5W_c3M_IQ88xI4H0VI068DyGSOySqTE4M5ghz_mRjL8FZK1f3x-SIPVQlVUq5kRIlTkk_GLhewO3WN9suywZ48plJrSgRSkxm3QoWZzxOQe-NZBvQbMR1XmXrei31V4sY"
+
+        fetch("https://accounts.spotify.com/api/token", {
+            body: "grant_type=refresh_token&refresh_token=NgAagA...NUm_SHo",
             headers: {
-            Accept: "application/json",
-            Authorization: "Bearer BQCubWVj4YY1ZW7WIlqobKsFUNUpX7jFYaRwlHrNo1vDBncNSd3cOcrUzJYBrVIPq7ccFcUhSzpWHvv5wRH4I7VjJ5HE5rBrx8gPPyF--HPPlOkhIlc-Rnpl9JNcvkS_p9Jv0Ig7AiBmysI",
-            "Content-Type": "application/json"
-  }
-})
-        .then(resp => resp.json())
-        .then(resp => {
-            this.setState({
-                playlists : resp.playlists.items
-            })
+                Authorization: "Basic ZjM4Zj...Y0MzE=",
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST"
         })
+        .then(resp => {
+            console.log(resp)
+        })
+
+
+
+//         fetch("https://api.spotify.com/v1/browse/featured-playlists?country=United%20States&limit=8", {
+//          headers: {
+//             Accept: "application/json",
+//             Authorization: `Bearer ${accessToken}`,
+//             "Content-Type": "application/json"
+//   }
+// })
+//         .then(resp => resp.json())
+//         .then(resp => {
+//             this.setState({
+//                 playlists : resp.playlists.items
+//             })
+//         })
     }
 
     handleNum = (e) => {
@@ -84,9 +123,7 @@ class ChoosieProcess extends Component {
         return (
             <div className='app'>
                 < NavBar />
-                { this.props.setCategory === 'movies' ? this.getMovies() : null }
-                { this.props.setCategory === 'cinema' ? this.getCinema() : null }
-                { this.props.setCategory === 'music' ? this.getPlaylists() : null }
+                
                 { this.props.setCategory === 'cuisine' ? 
                 <div>
                     <PlacesAutocomplete
