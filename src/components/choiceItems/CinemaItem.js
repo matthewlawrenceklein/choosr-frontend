@@ -4,10 +4,10 @@ class CinemaItem extends Component {
     render() {
         console.log(this.props)
         return (
-            <div>
-                <h3> {this.props.title}</h3>
-                <h5> IMDb Rating : {this.props.rating}</h5>
-                <img src={this.props.photo} alt='poster'/>
+            <div className='item-card'>
+                <h4> {this.props.title}</h4>
+                <p> IMDb Rating : {this.props.rating}</p>
+                <img className='item-movie-image' src={this.props.photo} alt='poster'/>
             </div>
         );
     }

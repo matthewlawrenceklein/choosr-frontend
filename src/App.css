@@ -37,6 +37,8 @@
 .avatar {
   width: 70px;
   border-radius: 50%;
+  box-shadow: 5px 5px 12px -4px rgba(0,0,0,0.63);
+
 }
 
 .footer{
@@ -109,4 +111,28 @@
 
 #chooser-input-title{
   margin: 15px;
+}
+
+.item-image {
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px -4px rgba(0,0,0,0.63); 
+}
+
+.item-card{
+  border-style: solid;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 32px -4px rgba(0,0,0,0.63);
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 28%, rgba(253,187,45,1) 99%);
+  width: 250px;
+}
+
+.item-movie-image {
+  height: 200px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px -4px rgba(0,0,0,0.63); 
 }
