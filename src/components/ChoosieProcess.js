@@ -126,18 +126,18 @@ class ChoosieProcess extends Component {
  
     render() {
         return (
-            <div className='app'>
+            <div className='App'>
                 < NavBar />
                 
                 { this.props.setCategory === 'cuisine' ? 
-                <div>
+                <div className=''>
                     <PlacesAutocomplete
                     value={this.state.address}
                     onChange={this.handleChange}
                     onSelect={this.handleSelect}
                     >
                     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
+                    <div className='chooser-input'>
                         <input
                         {...getInputProps({
                             placeholder: 'Your Address...',
@@ -172,9 +172,11 @@ class ChoosieProcess extends Component {
               </div>
                 
                 : null  }
-                    <h3 id="chooser-input-title"> How Many Choosers?</h3>
-                    <input className='chooser-num-select' type='number' max='4' onChange={this.handleNum}></input>
-                    <br></br>
+                    <div className=''>
+                        <h3 id="chooser-input-title"> How Many Choosers?</h3>
+                        <input className='' type='number' max='4' placeholder='0' onChange={this.handleNum}></input>
+                        <br></br>
+                    </div>
 
                 { this.state.numChoosers === 1 ?
                  <div>

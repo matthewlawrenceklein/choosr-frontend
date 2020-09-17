@@ -15,7 +15,7 @@ import { Route, Switch } from "react-router-dom";
 
 function App(props) {
   return (
-    <div className='App'>
+    <div className=''>
       <Switch>
         <Route exact path="/">
           { props.loggedIn ? 

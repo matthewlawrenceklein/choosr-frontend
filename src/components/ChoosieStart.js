@@ -52,7 +52,6 @@ class ChoosieStart extends Component {
                             < CinemaItem title={this.props.cinema[6].title} photo={this.props.cinema[6].photo_url} rating={this.props.cinema[6].imdb}/>
                             < CinemaItem title={this.props.cinema[7].title} photo={this.props.cinema[7].photo_url} rating={this.props.cinema[7].imdb}/>
                         </Row>
-
                     </Container>
                 </div>
             )
