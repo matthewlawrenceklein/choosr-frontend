@@ -167,6 +167,7 @@ chooser-input-form:focus{
   width: 200px;
   border-radius: 10px;
   box-shadow: 3px 3px 10px -4px rgba(0,0,0,0.63); 
+  transition: 0.2s;
 }
 
 .item-card{
@@ -192,6 +193,7 @@ chooser-input-form:focus{
   height: 220px;
   border-radius: 10px;
   box-shadow: 3px 3px 10px -4px rgba(0,0,0,0.63); 
+  transition: 0.2;
 }
 
 .places-form{

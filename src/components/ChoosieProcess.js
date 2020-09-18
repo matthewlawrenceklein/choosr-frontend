@@ -247,7 +247,7 @@ const mapStateToProps = (state) => {
         userObj: state.userObj,
         loggedIn: state.loggedIn,
         setCategory: state.setCategory
-    }
+    } 
   }
 
   const mapDispatchToProps = {

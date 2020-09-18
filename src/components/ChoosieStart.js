@@ -7,6 +7,12 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
+import { Redirect } from "react-router-dom"
+
+// TODO add all 8 chosen objects of any given category into a redux store. onClick, filter store to include
+// only items not matching selected. 
+// once setChosenCount === 7, do something wth the final redux store element from above array. 
+
 
 class ChoosieStart extends Component {
 
@@ -142,6 +148,7 @@ class ChoosieStart extends Component {
         return (
             <div>
                 < NavBar />
+                { this.props.chosenCount === 7 ? <Redirect push to="/choosie/finish" /> : null  }
                 
                 { this.props.setCategory === 'movies' ? this.renderMovies() : null }
                 { this.props.setCategory === 'cinema' ? this.renderCinema() : null }
@@ -161,7 +168,8 @@ const mapStateToProps = (state) => {
         cinema : state.setCinema, 
         playlists : state.setPlaylists, 
         latLon : state.setLatLon, 
-        chooserNames : state.setChooserNames 
+        chooserNames : state.setChooserNames,
+        chosenCount : state.setChosenCount 
     }
 }
 
