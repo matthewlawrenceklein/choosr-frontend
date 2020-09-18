@@ -53,3 +53,10 @@ export const setChooserNames = (chooserNames) => {
     setChooserNames : chooserNames
   }
 }
+
+export const setChosenCount = (count) => {
+  return {
+    type: 'SET_CHOSEN_COUNT',
+    setChosenCount : count
+  }
+}

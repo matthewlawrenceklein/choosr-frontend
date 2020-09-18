@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import ReactDOM from 'react-dom'
 import MovieItem from './choiceItems/MovieItem'
 import CinemaItem from './choiceItems/CinemaItem'
 import CuisineItem from './choiceItems/CuisineItem'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import { Container } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 
 class ChoosieStart extends Component {

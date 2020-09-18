@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { Col } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Container } from 'react-bootstrap'
 import { DoorClosed } from 'react-bootstrap-icons';
 import { connect } from 'react-redux';
 import '../App.css';
