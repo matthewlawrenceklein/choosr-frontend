@@ -60,3 +60,10 @@ export const setChosenCount = (count) => {
     setChosenCount : count
   }
 }
+
+export const setChoiceSet = (choices) => {
+  return {
+    type: 'SET_CHOICE_SET',
+    setChoiceSet : choices
+  }
+}

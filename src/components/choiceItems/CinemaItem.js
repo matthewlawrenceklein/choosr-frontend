@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { setChosenCount } from '../../actions/index'
+import { setChoiceSet } from '../../actions/index'
+
 
 class CinemaItem extends Component {
     state = {
@@ -10,6 +12,9 @@ class CinemaItem extends Component {
     handleClick = () => {
         let newCount = this.props.chosenCount + 1
         this.props.setChosenCount(newCount)
+
+        let newChoiceSet = this.props.choiceSet.filter( item => item.title !== this.props.title) 
+        this.props.setChoiceSet(newChoiceSet)
     
         this.setState({
             cancelled : true 
@@ -17,7 +22,6 @@ class CinemaItem extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className='item-card' onClick={ this.state.cancelled ? null : this.handleClick }>
                 <h5> {this.props.title}</h5>
@@ -29,12 +33,14 @@ class CinemaItem extends Component {
 }
 
 const mapDispatchToProps = {
-    setChosenCount
+    setChosenCount,
+    setChoiceSet
 }
 
 const mapStateToProps = (state) => {
     return {
         chosenCount : state.setChosenCount,
+        choiceSet : state.setChoiceSet
     }
   }
 

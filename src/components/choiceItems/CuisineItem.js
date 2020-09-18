@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { setChosenCount } from '../../actions/index'
+import { setChoiceSet } from '../../actions/index'
+
 
 class CuisineItem extends Component {
 
@@ -11,11 +13,14 @@ class CuisineItem extends Component {
     handleClick = () => {
         let newCount = this.props.chosenCount + 1
         this.props.setChosenCount(newCount)
+        let newChoiceSet = this.props.choiceSet.filter( item => item.title !== this.props.title) 
+        this.props.setChoiceSet(newChoiceSet)
     
         this.setState({
             cancelled : true 
         })        
     }
+    
     render() {
         console.log(this.props)
         return (
@@ -28,12 +33,14 @@ class CuisineItem extends Component {
 }
 
 const mapDispatchToProps = {
-    setChosenCount
+    setChosenCount,
+    setChoiceSet
 }
 
 const mapStateToProps = (state) => {
     return {
         chosenCount : state.setChosenCount,
+        choiceSet : state.setChoiceSet
     }
   }
 

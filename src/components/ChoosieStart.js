@@ -17,7 +17,6 @@ import { Redirect } from "react-router-dom"
 class ChoosieStart extends Component {
 
     renderMovies = () => {
-           
             return ( 
             <div className='App'>
                 <Container>
@@ -39,8 +38,6 @@ class ChoosieStart extends Component {
     }
 
     renderCinema = () => {
-        this.shuffle(this.props.cinema)
-
             return (
                 <div className='App'>
                     <Container>
@@ -62,7 +59,7 @@ class ChoosieStart extends Component {
     }
 
     renderCuisines = () => {
-      
+        let arrayOfCuisineTypes = []
         const cuisines = [
              {
                 name : 'Vietnamese', 
@@ -112,7 +109,11 @@ class ChoosieStart extends Component {
             // "Pub Food" : 983,
             // "Pizza" : 82
         ]
-        let arrayOfCuisineTypes = this.shuffle(cuisines)
+        let shuffled = this.shuffle(cuisines)
+        for(let i = 0; i < 9; i++){
+            arrayOfCuisineTypes.push(shuffled[i])
+        }
+        // TODO hook in redux and push arrayOfCuisineTypes to redux store choiceSet
         return (
             <div>
                 <Container>

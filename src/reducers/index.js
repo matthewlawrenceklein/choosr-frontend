@@ -8,6 +8,7 @@ import setPlaylists from './setPlaylists'
 import setLatLon from './setLatLon'
 import setChooserNames from './setChooserNames'
 import setChosenCount from './setChosenCount'
+import setChoiceSet from './setChoiceSet'
 
 
 export default combineReducers({
@@ -19,6 +20,7 @@ export default combineReducers({
     setPlaylists,
     setLatLon,
     setChooserNames,
-    setChosenCount
+    setChosenCount,
+    setChoiceSet
 })
  

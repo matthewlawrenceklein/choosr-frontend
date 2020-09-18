@@ -15,6 +15,7 @@ import { setCinema } from '../actions/index'
 import { setPlaylists } from '../actions/index'
 import { setLatLon } from '../actions/index'
 import { setChooserNames } from '../actions/index'
+import { setChoiceSet } from '../actions/index'
 
 class ChoosieProcess extends Component {
 
@@ -51,18 +52,36 @@ class ChoosieProcess extends Component {
                     movies.push(resp.results[i])
                 }
                 this.props.setMovies(movies)
+                this.props.setChoiceSet(movies)
             })    
     }
 
     getCinema = () => {
         let cinema = []
+        let filteredCinema = []
         const db = firebase.firestore();
         db.collection("classic-movies").get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 cinema.push(doc.data())
             });
-            this.props.setCinema(cinema)
+            this.shuffle(cinema)
+            for(let i = 0; i < 8; i++){
+                filteredCinema.push(cinema[i])
+            }
+            this.props.setCinema(filteredCinema)
+            this.props.setChoiceSet(filteredCinema)
         });        
+    }
+
+    shuffle = (a) => {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
     }
 
     getPlaylists = () => {
@@ -248,14 +267,15 @@ const mapStateToProps = (state) => {
         loggedIn: state.loggedIn,
         setCategory: state.setCategory
     } 
-  }
+}
 
   const mapDispatchToProps = {
     setMovies,
     setCinema,
     setPlaylists,
     setLatLon,
-    setChooserNames
+    setChooserNames,
+    setChoiceSet
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChoosieProcess)
