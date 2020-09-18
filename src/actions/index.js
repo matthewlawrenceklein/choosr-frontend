@@ -67,3 +67,10 @@ export const setChoiceSet = (choices) => {
     setChoiceSet : choices
   }
 }
+
+export const setCuisines = (cuisines) => {
+  return {
+    type: 'SET_CUISINES',
+    setCuisines : cuisines
+  }
+}

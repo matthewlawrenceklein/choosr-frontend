@@ -9,6 +9,7 @@ import setLatLon from './setLatLon'
 import setChooserNames from './setChooserNames'
 import setChosenCount from './setChosenCount'
 import setChoiceSet from './setChoiceSet'
+import setCuisines from './setCuisines'
 
 
 export default combineReducers({
@@ -21,6 +22,7 @@ export default combineReducers({
     setLatLon,
     setChooserNames,
     setChosenCount,
-    setChoiceSet
+    setChoiceSet,
+    setCuisines 
 })
  

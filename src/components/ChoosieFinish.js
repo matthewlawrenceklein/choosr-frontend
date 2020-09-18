@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import CinemaItem from './choiceItems/CinemaItem'
+import CuisineItem from './choiceItems/CuisineItem';
 import MovieItem from './choiceItems/MovieItem'
 
 
@@ -26,16 +27,19 @@ class ChoosieFinish extends Component {
 
     handleMovies = () => {
         console.log(this.props.choiceSet[0])
+        // TODO generate streaming link
     }
 
     handleCinema = () => {
         console.log(this.props.choiceSet[0])
+        // TODO generate streaming link 
     }
 
     render() {
 
         return (
           <div className='App'>
+              { this.props.setCategory === 'cuisine' ? <CuisineItem title={this.props.choiceSet[0].name} image={this.props.choiceSet[0].image}/> : null }
               { this.props.setCategory === 'movies' ? <MovieItem poster={this.props.choiceSet[0].poster_path} title={this.props.choiceSet[0].title}/> : null }
 
               { this.props.setCategory === 'cinema' ? <CinemaItem photo={this.props.choiceSet[0].photo_url} 
@@ -53,7 +57,7 @@ const mapStateToProps = (state) => {
         userObj: state.userObj,
         setCategory: state.setCategory,
         movies : state.setMovies, 
-        cinema : state.setCinema, 
+        cinema : state.setCinema,
         playlists : state.setPlaylists, 
         latLon : state.setLatLon, 
         chooserNames : state.setChooserNames,

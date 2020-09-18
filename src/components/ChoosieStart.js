@@ -8,10 +8,8 @@ import Footer from './Footer'
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Redirect } from "react-router-dom"
+import { setChoiceSet } from '../actions/index'
 
-// TODO add all 8 chosen objects of any given category into a redux store. onClick, filter store to include
-// only items not matching selected. 
-// once setChosenCount === 7, do something wth the final redux store element from above array. 
 
 
 class ChoosieStart extends Component {
@@ -59,91 +57,26 @@ class ChoosieStart extends Component {
     }
 
     renderCuisines = () => {
-        let arrayOfCuisineTypes = []
-        const cuisines = [
-             {
-                name : 'Vietnamese', 
-                id : 99,
-                image : process.env.PUBLIC_URL + '/vietnamese.jpg'
-            }, 
-           {
-               name : 'Vegetarian', 
-               id:  308,
-               image : process.env.PUBLIC_URL + '/vegetarian.jpg'
-            },
-            {
-                name : 'Turkish',
-                id : 142,
-                image : process.env.PUBLIC_URL + '/turkish.jpg'
-            }, 
-            {
-                name : 'Thai',
-                id : 95,
-                image : process.env.PUBLIC_URL + '/thai.jpg'
-            },
-            {
-                name : "Sushi",
-                id :177, 
-                image : process.env.PUBLIC_URL + '/sushi.jpg'
-            },
-            {
-                name : 'Steak',
-                id : 141, 
-                image : process.env.PUBLIC_URL + '/steak.jpg'
-            },
-            {
-                name : 'Spanish',
-                id : 89, 
-                image : process.env.PUBLIC_URL + '/spanish.jpg'
-            },
-            {
-                name : 'Sandwich',
-                id : 304, 
-                image : process.env.PUBLIC_URL + '/sandwich.jpg'
-            },
-            // "Southern" : 471, 
-            // "South American" : 972, 
-            // "Seafood" : 83, 
-            // "Salad" : 998, 
-            // "Ramen" : 320,
-            // "Pub Food" : 983,
-            // "Pizza" : 82
-        ]
-        let shuffled = this.shuffle(cuisines)
-        for(let i = 0; i < 9; i++){
-            arrayOfCuisineTypes.push(shuffled[i])
-        }
-        // TODO hook in redux and push arrayOfCuisineTypes to redux store choiceSet
         return (
             <div>
                 <Container>
                     <Row>
-                        <CuisineItem title={arrayOfCuisineTypes[0].name} image={arrayOfCuisineTypes[0].image}/>
-                        <CuisineItem title={arrayOfCuisineTypes[1].name} image={arrayOfCuisineTypes[1].image}/>
-                        <CuisineItem title={arrayOfCuisineTypes[2].name} image={arrayOfCuisineTypes[2].image}/>
-                        <CuisineItem title={arrayOfCuisineTypes[3].name} image={arrayOfCuisineTypes[3].image}/>
+                        <CuisineItem title={this.props.cuisines[0].name} image={this.props.cuisines[0].image}/>
+                        <CuisineItem title={this.props.cuisines[1].name} image={this.props.cuisines[1].image}/>
+                        <CuisineItem title={this.props.cuisines[2].name} image={this.props.cuisines[2].image}/>
+                        <CuisineItem title={this.props.cuisines[3].name} image={this.props.cuisines[3].image}/>
                     </Row>
                     <Row>
-                        <CuisineItem title={arrayOfCuisineTypes[4].name} image={arrayOfCuisineTypes[4].image}/>
-                        <CuisineItem title={arrayOfCuisineTypes[5].name} image={arrayOfCuisineTypes[5].image}/>
-                        <CuisineItem title={arrayOfCuisineTypes[6].name} image={arrayOfCuisineTypes[6].image}/>
-                        <CuisineItem title={arrayOfCuisineTypes[7].name} image={arrayOfCuisineTypes[7].image}/>
+                        <CuisineItem title={this.props.cuisines[4].name} image={this.props.cuisines[4].image}/>
+                        <CuisineItem title={this.props.cuisines[5].name} image={this.props.cuisines[5].image}/>
+                        <CuisineItem title={this.props.cuisines[6].name} image={this.props.cuisines[6].image}/>
+                        <CuisineItem title={this.props.cuisines[7].name} image={this.props.cuisines[7].image}/>
                     </Row>
                 </Container>
             </div>
         )
     }
      
-    shuffle = (a) => {
-        var j, x, i;
-        for (i = a.length - 1; i > 0; i--) {
-            j = Math.floor(Math.random() * (i + 1));
-            x = a[i];
-            a[i] = a[j];
-            a[j] = x;
-        }
-        return a;
-    }
 
     render() {
         return (
@@ -167,6 +100,7 @@ const mapStateToProps = (state) => {
         setCategory: state.setCategory,
         movies : state.setMovies, 
         cinema : state.setCinema, 
+        cuisines : state.setCuisines, 
         playlists : state.setPlaylists, 
         latLon : state.setLatLon, 
         chooserNames : state.setChooserNames,
@@ -174,4 +108,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(ChoosieStart)
+const mapDispatchToProps = {
+    setChoiceSet
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChoosieStart)

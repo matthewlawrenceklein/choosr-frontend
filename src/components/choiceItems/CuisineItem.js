@@ -20,9 +20,8 @@ class CuisineItem extends Component {
             cancelled : true 
         })        
     }
-    
+
     render() {
-        console.log(this.props)
         return (
             <div className='item-card' onClick={ this.state.cancelled ? null : this.handleClick }>
                 <h3>{this.props.title}</h3>

@@ -16,6 +16,7 @@ import { setPlaylists } from '../actions/index'
 import { setLatLon } from '../actions/index'
 import { setChooserNames } from '../actions/index'
 import { setChoiceSet } from '../actions/index'
+import { setCuisines } from '../actions/index'
 
 class ChoosieProcess extends Component {
 
@@ -31,7 +32,8 @@ class ChoosieProcess extends Component {
                 this.getMovies()
                 break;
             case 'cuisine': 
-                break
+                this.getCuisines()
+                break;
             case 'music':
                 // this.getPlaylists()
                 break
@@ -71,6 +73,66 @@ class ChoosieProcess extends Component {
             this.props.setCinema(filteredCinema)
             this.props.setChoiceSet(filteredCinema)
         });        
+    }
+
+    getCuisines = () => {
+        let arrayOfCuisineTypes = []
+        const cuisines = [
+             {
+                name : 'Vietnamese', 
+                id : 99,
+                image : process.env.PUBLIC_URL + '/vietnamese.jpg'
+            }, 
+           {
+               name : 'Vegetarian', 
+               id:  308,
+               image : process.env.PUBLIC_URL + '/vegetarian.jpg'
+            },
+            {
+                name : 'Turkish',
+                id : 142,
+                image : process.env.PUBLIC_URL + '/turkish.jpg'
+            }, 
+            {
+                name : 'Thai',
+                id : 95,
+                image : process.env.PUBLIC_URL + '/thai.jpg'
+            },
+            {
+                name : "Sushi",
+                id :177, 
+                image : process.env.PUBLIC_URL + '/sushi.jpg'
+            },
+            {
+                name : 'Steak',
+                id : 141, 
+                image : process.env.PUBLIC_URL + '/steak.jpg'
+            },
+            {
+                name : 'Spanish',
+                id : 89, 
+                image : process.env.PUBLIC_URL + '/spanish.jpg'
+            },
+            {
+                name : 'Sandwich',
+                id : 304, 
+                image : process.env.PUBLIC_URL + '/sandwich.jpg'
+            },
+            // "Southern" : 471, 
+            // "South American" : 972, 
+            // "Seafood" : 83, 
+            // "Salad" : 998, 
+            // "Ramen" : 320,
+            // "Pub Food" : 983,
+            // "Pizza" : 82
+        ]
+        let shuffled = this.shuffle(cuisines)
+        for(let i = 0; i < 8; i++){
+            arrayOfCuisineTypes.push(shuffled[i])
+        }
+        this.props.setChoiceSet(arrayOfCuisineTypes)
+        this.props.setCuisines(arrayOfCuisineTypes)
+        // TODO hook in dispatch and push arrayOfCuisineTypes to redux store choiceSet    
     }
 
     shuffle = (a) => {
@@ -272,6 +334,7 @@ const mapStateToProps = (state) => {
   const mapDispatchToProps = {
     setMovies,
     setCinema,
+    setCuisines, 
     setPlaylists,
     setLatLon,
     setChooserNames,
