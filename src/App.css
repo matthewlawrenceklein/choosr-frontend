@@ -18,6 +18,12 @@
   color: black;
 }
 
+.nav-icon:hover {
+  color: mediumturquoise;
+  transition: 0.3s;
+
+}
+
 .login{
   height: 200px;
   width: 175px;
@@ -105,11 +111,20 @@
   text-align: center;  
   position: relative;
   margin: 15px;
-  margin-top: 200px;
+  /* margin-top: 200px; */
   padding: 10px;
   border-radius: 20px;
   background: transparent;
-  border: none 
+  font-size: 25px;
+  width: 300px;
+  border-style: solid;
+}
+
+.chooser-input:focus{
+  border-style: solid;
+  border-width: 8px;
+  border-color: mediumturquoise;
+  transition: 0.3s;
 }
 .chooser-num-select{
   text-align: center;
@@ -120,12 +135,26 @@
   background: transparent;
 }
 
+chooser-input-form:focus{
+  border-style: solid;
+  border-width: 8px;
+  border-color: mediumturquoise;
+  transition: 0.3s;
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color:black;
   opacity: 1; /* Firefox */
 }
 
 .chooser-input-form{
+  text-align: center;
+  padding: 5px;
+  background-color: transparent;
+  font-size: 25px;
+  width: 100px;
+  border-style: solid;
+  border-radius: 20px;
 }
 
 
@@ -153,10 +182,25 @@
   width: 250px;
 }
 
+.item-card:hover{
+  border-width: 6px;
+  border-color: salmon;
+  transition: 0.3s
+}
+
 .item-movie-image {
   height: 220px;
   border-radius: 10px;
   box-shadow: 3px 3px 10px -4px rgba(0,0,0,0.63); 
 }
 
+.places-form{
+  width: 500px;
+}
+
+.places-container{
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
 

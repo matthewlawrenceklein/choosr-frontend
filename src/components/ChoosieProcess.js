@@ -130,51 +130,54 @@ class ChoosieProcess extends Component {
                 < NavBar />
                 
                 { this.props.setCategory === 'cuisine' ? 
-                <div className=''>
-                    <PlacesAutocomplete
-                    value={this.state.address}
-                    onChange={this.handleChange}
-                    onSelect={this.handleSelect}
-                    >
-                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div className='chooser-input'>
-                        <input
-                        {...getInputProps({
-                            placeholder: 'Your Address...',
-                            className: 'choosr-input',
-                        })}
-                        />
-                        <div className="autocomplete-dropdown-container choosr-input">
-                        {loading && <div>Loading...</div>}
-                        {suggestions.map(suggestion => {
-                            const className = suggestion.active
-                            ? 'suggestion-item--active'
-                            : 'suggestion-item';
-                            // inline style for demonstration purpose
-                            const style = suggestion.active
-                            ? { backgroundColor: 'transparent', cursor: 'pointer' }
-                            : { backgroundColor: 'transparent', cursor: 'pointer' };
-                            return (
-                            <div
-                                {...getSuggestionItemProps(suggestion, {
-                                className,
-                                style,
-                                })}
-                            >
-                                <span>{suggestion.description}</span>
+                <div className='places-container'>
+                    <div className='places-form'>
+                        <PlacesAutocomplete
+                        value={this.state.address}
+                        onChange={this.handleChange}
+                        onSelect={this.handleSelect}
+                        >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                        <div className=''>
+                            <input
+                            {...getInputProps({
+                                placeholder: 'Your Address...',
+                                className: 'choosr-input',
+                            })}
+                            />
+                            <div className="autocomplete-dropdown-container choosr-input">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map(suggestion => {
+                                const className = suggestion.active
+                                ? 'suggestion-item--active'
+                                : 'suggestion-item';
+                                // inline style for demonstration purpose
+                                const style = suggestion.active
+                                ? { backgroundColor: '#F0F8FF', cursor: 'pointer' }
+                                : { backgroundColor: 'transparent', cursor: 'pointer' };
+                                return (
+                                <div
+                                    {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                    })}
+                                >
+                                    <span>{suggestion.description}</span>
+                                </div>
+                                );
+                            })}
                             </div>
-                            );
-                        })}
                         </div>
-                    </div>
-                    )}
-                </PlacesAutocomplete>
+                        )}
+                    </PlacesAutocomplete>
+
+                </div>
               </div>
                 
                 : null  }
                     <div className=''>
                         <h3 id="chooser-input-title"> How Many Choosers?</h3>
-                        <input className='' type='number' max='4' placeholder='0' onChange={this.handleNum}></input>
+                        <input className='chooser-input-form' type='number' max='4' placeholder='0' onChange={this.handleNum}></input>
                         <br></br>
                     </div>
 

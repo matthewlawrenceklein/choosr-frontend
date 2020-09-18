@@ -144,7 +144,7 @@ class ChoosieStart extends Component {
         return (
             <div>
                 < NavBar />
-
+                
                 { this.props.setCategory === 'movies' ? this.renderMovies() : null }
                 { this.props.setCategory === 'cinema' ? this.renderCinema() : null }
                 { this.props.setCategory === 'cuisine' ? this.renderCuisines() : null }
