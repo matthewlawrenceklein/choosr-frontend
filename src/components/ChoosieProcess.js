@@ -17,6 +17,7 @@ import { setLatLon } from '../actions/index'
 import { setChooserNames } from '../actions/index'
 import { setChoiceSet } from '../actions/index'
 import { setCuisines } from '../actions/index'
+import { setChosenCount } from '../actions/index'
 
 class ChoosieProcess extends Component {
 
@@ -25,8 +26,9 @@ class ChoosieProcess extends Component {
         chooserNames : {}, 
         address : '',
     }
-
+    
     componentDidMount(){
+        this.props.setChosenCount(0)
         switch (this.props.setCategory) {
             case 'movies':
                 this.getMovies()
@@ -338,7 +340,8 @@ const mapStateToProps = (state) => {
     setPlaylists,
     setLatLon,
     setChooserNames,
-    setChoiceSet
+    setChoiceSet,
+    setChosenCount
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChoosieProcess)

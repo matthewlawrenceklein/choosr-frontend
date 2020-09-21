@@ -8,7 +8,8 @@ import Footer from './Footer'
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Redirect } from "react-router-dom"
-import { setChoiceSet } from '../actions/index'
+
+
 import ChoosieTurnMechanism from './ChoosieTurnMechanism';
 
 
@@ -40,6 +41,7 @@ class ChoosieStart extends Component {
     renderCinema = () => {
             return (
                 <div className='App'>
+                    <ChoosieTurnMechanism />
                     <Container>
                         <Row>
                             < CinemaItem title={this.props.cinema[0].title} photo={this.props.cinema[0].photo_url} rating={this.props.cinema[0].imdb}/>
@@ -61,6 +63,7 @@ class ChoosieStart extends Component {
     renderCuisines = () => {
         return (
             <div>
+                <ChoosieTurnMechanism />
                 <Container>
                     <Row>
                         <CuisineItem title={this.props.cuisines[0].name} image={this.props.cuisines[0].image}/>
@@ -111,7 +114,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    setChoiceSet
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChoosieStart)

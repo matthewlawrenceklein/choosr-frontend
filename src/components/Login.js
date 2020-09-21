@@ -53,7 +53,7 @@ handleSignIn = (provider) => {
         return (
             <div className='container'>
                 <div className='login' >
-                    <img className='login-item' src={process.env.PUBLIC_URL + '/crow.png'} alt='crow'/> 
+                    <img className='nav-crow login-item' src={process.env.PUBLIC_URL + '/crow.png'} alt='crow'/> 
                     <br></br>
                     <button className='login-item' onClick={ () => this.handleSignIn(new firebase.auth.GoogleAuthProvider()) }>login with google</button>
                     <br></br>

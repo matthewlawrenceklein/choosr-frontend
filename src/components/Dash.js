@@ -5,7 +5,7 @@ import ReactCardCarousel from 'react-card-carousel';
 
 class Dash extends Component {
 
-   
+   //TODO component did mount should reset all redux choosie values back to default 
 
     render() {
         return (
