@@ -9,6 +9,7 @@ import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Redirect } from "react-router-dom"
 import { setChoiceSet } from '../actions/index'
+import ChoosieTurnMechanism from './ChoosieTurnMechanism';
 
 
 
@@ -17,6 +18,7 @@ class ChoosieStart extends Component {
     renderMovies = () => {
             return ( 
             <div className='App'>
+                <ChoosieTurnMechanism />
                 <Container>
                     <Row>
                         <MovieItem title={this.props.movies[0].title}overview={this.props.movies[0].overview} poster={this.props.movies[0].poster_path}/>
