@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { DoorClosed } from 'react-bootstrap-icons';
 import { connect } from 'react-redux';
+import { loggedIn } from '../actions/index'
+import { setUser } from '../actions/index'
 import '../App.css';
 
 
+
 class NavBar extends Component {
+
+    handleLogOut = () => {
+        this.props.loggedIn(false)
+        localStorage.clear()
+    }
+
     render() {
         return (
             <div className='nav-container'>
@@ -12,7 +21,7 @@ class NavBar extends Component {
                     <img className='avatar' src={this.props.userObj.photoURL} alt='avatar' /> 
                     <img src={process.env.PUBLIC_URL + '/crow.png'} alt='crow'/> 
                     <h4> choosr - lose it then choose it!</h4>
-                    <DoorClosed className='nav-icon'/> 
+                    <DoorClosed onClick={ this.handleLogOut }className='nav-icon'/> 
                 </div>
             </div>
         );
@@ -26,4 +35,9 @@ const mapStateToProps = (state) => {
     }
   }
 
-export default connect(mapStateToProps, null)(NavBar)
+  const mapDispatchToProps = {
+    setUser,
+    loggedIn
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

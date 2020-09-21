@@ -8,6 +8,7 @@ import { loggedIn } from '../actions/index'
 
 
 
+
 class Login extends Component {
 
 handleSignIn = (provider) => {
@@ -32,9 +33,13 @@ handleSignIn = (provider) => {
                 if (matchUserList.length === 0){
                     db.collection("users").add(userObj)
                     this.props.setUser(userObj)
+                    localStorage.setItem('user', userObj.email)
                     this.props.loggedIn(true)
 
+
                 } else {
+                    // this.props.setUser(matchUserList[0])
+                    localStorage.setItem('user', matchUserList[0].email)
                     this.props.setUser(matchUserList[0])
                     this.props.loggedIn(true)
 
@@ -68,4 +73,5 @@ const mapStateToProps = (state) => {
         userObj: state.userObj
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
