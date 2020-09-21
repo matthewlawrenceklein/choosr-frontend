@@ -12,6 +12,13 @@
 
 }
 
+.login-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh;
+}
+
 .nav-icon {
   font-size: 60px;
   margin: 15px;
@@ -52,7 +59,7 @@
   margin-top: 25px;
   text-align: center;
   position: relative;
-  width: 35%;
+  width: 400px;
 }
 
 .avatar {

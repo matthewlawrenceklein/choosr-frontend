@@ -51,7 +51,7 @@ handleSignIn = (provider) => {
  }
     render() {
         return (
-            <div className='container'>
+            <div className='login-container'>
                 <div className='login' >
                     <img className='nav-crow login-item' src={process.env.PUBLIC_URL + '/crow.png'} alt='crow'/> 
                     <br></br>
