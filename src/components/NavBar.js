@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DoorClosed } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { loggedIn } from '../actions/index'
 import { setUser } from '../actions/index'
@@ -19,7 +20,11 @@ class NavBar extends Component {
             <div className='nav-container'>
                 <div className='navbar'>
                     <img className='avatar' src={this.props.userObj.photoURL} alt='avatar' /> 
-                    <img src={process.env.PUBLIC_URL + '/crow.png'} alt='crow'/> 
+
+                    <Link to='/'>
+                        <img src={process.env.PUBLIC_URL + '/crow.png'} alt='crow' className='nav-crow'/> 
+                    </Link>
+
                     <h4> choosr - lose it then choose it!</h4>
                     <DoorClosed onClick={ this.handleLogOut }className='nav-icon'/> 
                 </div>

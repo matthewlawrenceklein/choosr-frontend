@@ -22,36 +22,21 @@ import "firebase/firestore"
 
 class App extends Component {
 
-  componentDidMount(){
-   
-    //   this.props.setUser(localStorage.getItem('user'))
-    
+  componentDidMount(){    
     if(localStorage.getItem('user')){
-
       const db = firebase.firestore();
       let matchUserList = []
-  
       db.collection("users").where("email", "==", localStorage.getItem('user'))
           .get().then((querySnapshot) => {
               querySnapshot.forEach((doc) => {
                   matchUserList.push(doc.data())
               });
-              console.log(matchUserList[0])
               this.props.setUser(matchUserList[0])
               this.props.loggedIn(true)
           });
-    }
-    
-      
-    
-    
-    
-    
-    
-    
+      }
     } 
   
-
   render(){
     return (
       <div className=''>
@@ -91,8 +76,6 @@ class App extends Component {
     );
   }}
 
-  
-
 const mapStateToProps = (state) => {
   return {
       cuurentUserObj: state.userObj,
@@ -105,6 +88,5 @@ const mapDispatchToProps = {
   setUser,
   loggedIn
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

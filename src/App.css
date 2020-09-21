@@ -18,6 +18,11 @@
   color: black;
 }
 
+.nav-crow:hover{
+  transform: rotate(360deg);
+  transition: .6s;
+}
+
 .nav-icon:hover {
   color: mediumturquoise;
   transition: 0.3s;
