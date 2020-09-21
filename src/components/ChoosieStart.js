@@ -62,7 +62,7 @@ class ChoosieStart extends Component {
 
     renderCuisines = () => {
         return (
-            <div>
+            <div className='App'>
                 <ChoosieTurnMechanism />
                 <Container>
                     <Row>

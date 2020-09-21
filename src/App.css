@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center; 
   align-items: center; 
-  min-height: 100vh;
+  /* min-height: 100vh; */
 
 }
 
@@ -211,3 +211,6 @@ chooser-input-form:focus{
   align-items: center; 
 }
 
+turn-counter{
+  text-align: center;
+}

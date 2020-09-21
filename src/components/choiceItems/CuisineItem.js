@@ -13,7 +13,8 @@ class CuisineItem extends Component {
     handleClick = () => {
         let newCount = this.props.chosenCount + 1
         this.props.setChosenCount(newCount)
-        let newChoiceSet = this.props.choiceSet.filter( item => item.title !== this.props.title) 
+
+        let newChoiceSet = this.props.choiceSet.filter(item => item.image !== this.props.image) 
         this.props.setChoiceSet(newChoiceSet)
     
         this.setState({
