@@ -60,7 +60,7 @@ class ChoosieFinish extends Component {
         .then(resp => resp.json())
         .then(resp => {
             const restaurants = this.shuffle(resp.restaurants)
-            const { name, location, featured_image, menu_url} = restaurants[0].restaurant
+            const { name, location, featured_image, menu_url } = restaurants[0].restaurant
             this.setState({
                 name : name, 
                 location : location.address,
