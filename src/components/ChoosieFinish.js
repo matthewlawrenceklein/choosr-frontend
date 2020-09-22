@@ -6,8 +6,14 @@ import FinalCuisineItem from './choiceItems/FinalCuisineItem'
 
 class ChoosieFinish extends Component {
 
+    state={
+        name : '',
+        location : '', 
+        featured_image : '', 
+        menu : ''
+    }
+
     componentDidMount = () => {
-        
         switch (this.props.setCategory) {
             case 'cuisine':
                 this.handleCuisine()
@@ -21,7 +27,6 @@ class ChoosieFinish extends Component {
             default:
                 break;
         }
-
     }
 
     shuffle = (a) => {
@@ -38,9 +43,9 @@ class ChoosieFinish extends Component {
     handleCuisine = () => {
         const { lat, lng } = this.props.latLon
         const id = parseInt(this.props.choiceSet[0].id)
-        // add distinction between delivery and pickup, adjust radius search accordingly w variable 
+        const radius = 10000 // TODO dist in meters => set this to be variable based on delivery or takeout
 
-        fetch(`https://developers.zomato.com/api/v2.1/search?count=3&lat=${lat}&lon=${lng}&radius=10000&cuisines=${parseInt(id)}&sort=rating`, {
+        fetch(`https://developers.zomato.com/api/v2.1/search?count=3&lat=${lat}&lon=${lng}&radius=${radius}&cuisines=${id}&sort=rating`, {
         headers: {
         Accept: "application/json",
         "User-Key": "7b934257aa35e3ba2609e8d3443b4466"
@@ -48,16 +53,14 @@ class ChoosieFinish extends Component {
         .then(resp => resp.json())
         .then(resp => {
             const restaurants = this.shuffle(resp.restaurants)
-            // console.log(restaurants[0].restaurant)
             const { name, location, featured_image, menu_url} = restaurants[0].restaurant
-            console.log(name, location, featured_image, menu_url)
             this.setState({
                 name : name, 
                 location : location.address,
-                // featured_image : featured_image, 
+                featured_image : featured_image, 
                 menu : menu_url
-
             })
+            console.log(this.state)
         })  
         
     }
@@ -73,14 +76,16 @@ class ChoosieFinish extends Component {
     }
 
     render() {
+        
 
         return (
         <div className='container'>
           <div className='App'>
-              { this.props.setCategory === 'cuisine' ? <FinalCuisineItem image={this.props.choiceSet[0].image}
+              { this.props.setCategory === 'cuisine' ? <FinalCuisineItem image={this.state.featured_image ? this.state.featured_image : this.props.choiceSet[0].image}
                                                                          name={this.state.name}
                                                                          location={this.state.location}
                                                                          menu={this.state.menu}
+                                                                         category={this.props.choiceSet[0].name}
               
               
               
