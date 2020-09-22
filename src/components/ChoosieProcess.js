@@ -49,7 +49,7 @@ class ChoosieProcess extends Component {
 
     getMovies = () => {
         let movies = []
-        fetch('https://api.themoviedb.org/3/movie/popular?api_key=6103f090c7736779632b18a2a4abb0bb&language=en-US&page=1')
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`)
             .then(resp => resp.json())
             .then(resp => {
                 for(let i = 0; i < 8; i++){
@@ -152,7 +152,7 @@ class ChoosieProcess extends Component {
         fetch("https://accounts.spotify.com/api/token", {
         body: "grant_type=client_credentials",
         headers: {
-            Authorization: "Basic MWQ3YTFmMjRjNzA4NDNmYmE4ZTkyMDJkNWUyZTY4OWU6NTc1ZGVlMTNmNzk4NGUwY2EwYTE4MWMwNzgzMTBkZWU=",
+            Authorization: `Basic ${process.env.REACT_APP_SPOTIFY_KEY}`,
             "Content-Type": "application/x-www-form-urlencoded"
         },
         method: "POST"

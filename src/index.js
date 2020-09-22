@@ -14,7 +14,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAal_rNN5Ym4umMAEz2BIhzWq4MRbnM6yY",
+  apiKey: `${process.env.REACT_APP_FIREBASE_KEY}`,
   authDomain: "choosr-f4ee6.firebaseapp.com",
   databaseURL: "https://choosr-f4ee6.firebaseio.com",
   projectId: "choosr-f4ee6",
