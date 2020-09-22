@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import MovieItem from './choiceItems/MovieItem'
 import CinemaItem from './choiceItems/CinemaItem'
 import CuisineItem from './choiceItems/CuisineItem'
+import PlaylistItem from './choiceItems/PlaylistItem'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import { Container } from 'react-bootstrap';
@@ -15,6 +16,28 @@ import ChoosieTurnMechanism from './ChoosieTurnMechanism';
 
 
 class ChoosieStart extends Component {
+
+    renderPlaylists = () => {
+        return (
+            <div className='App'>
+                <ChoosieTurnMechanism />
+                <Container>
+                    <Row>
+                        <PlaylistItem name={this.props.playlists[0].name} description={this.props.playlists[0].description} image={this.props.playlists[0].images[0].url}/>
+                        <PlaylistItem name={this.props.playlists[1].name} description={this.props.playlists[1].description} image={this.props.playlists[1].images[0].url}/>
+                        <PlaylistItem name={this.props.playlists[2].name} description={this.props.playlists[2].description} image={this.props.playlists[2].images[0].url}/>
+                        <PlaylistItem name={this.props.playlists[3].name} description={this.props.playlists[3].description} image={this.props.playlists[3].images[0].url}/>
+                    </Row>
+                    <Row>
+                        <PlaylistItem name={this.props.playlists[4].name} description={this.props.playlists[4].description} image={this.props.playlists[4].images[0].url}/>
+                        <PlaylistItem name={this.props.playlists[5].name} description={this.props.playlists[5].description} image={this.props.playlists[5].images[0].url}/>
+                        <PlaylistItem name={this.props.playlists[6].name} description={this.props.playlists[6].description} image={this.props.playlists[6].images[0].url}/>
+                        <PlaylistItem name={this.props.playlists[7].name} description={this.props.playlists[7].description} image={this.props.playlists[7].images[0].url}/>
+                    </Row>
+                </Container>
+            </div>
+        )    
+    }
 
     renderMovies = () => {
             return ( 
@@ -92,6 +115,7 @@ class ChoosieStart extends Component {
                 { this.props.setCategory === 'movies' ? this.renderMovies() : null }
                 { this.props.setCategory === 'cinema' ? this.renderCinema() : null }
                 { this.props.setCategory === 'cuisine' ? this.renderCuisines() : null }
+                { this.props.setCategory === 'music' ? this.renderPlaylists() : null }
 
                 <Footer />
             </div>

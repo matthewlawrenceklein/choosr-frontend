@@ -257,4 +257,6 @@ turn-counter{
 .final-image{
   width: 600px;
   margin: 25px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 32px -4px rgba(0,0,0,0.63);
 }

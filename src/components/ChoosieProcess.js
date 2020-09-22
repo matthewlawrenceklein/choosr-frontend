@@ -37,7 +37,7 @@ class ChoosieProcess extends Component {
                 this.getCuisines()
                 break;
             case 'music':
-                // this.getPlaylists()
+                this.getPlaylists()
                 break
             case 'cinema': 
                 this.getCinema()
@@ -149,31 +149,30 @@ class ChoosieProcess extends Component {
     }
 
     getPlaylists = () => {
-        let accessToken = "BQAJLJUiZeWolz5W_c3M_IQ88xI4H0VI068DyGSOySqTE4M5ghz_mRjL8FZK1f3x-SIPVQlVUq5kRIlTkk_GLhewO3WN9suywZ48plJrSgRSkxm3QoWZzxOQe-NZBvQbMR1XmXrei31V4sY"
-
         fetch("https://accounts.spotify.com/api/token", {
-            body: "grant_type=refresh_token&refresh_token=NgAagA...NUm_SHo",
-            headers: {
-                Authorization: "Basic ZjM4Zj...Y0MzE=",
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST"
-        })
-        .then(resp => {
-            console.log(resp)
-        })
-
-        fetch("https://api.spotify.com/v1/browse/featured-playlists?country=United%20States&limit=8", {
-         headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json"
-        }
+        body: "grant_type=client_credentials",
+        headers: {
+            Authorization: "Basic MWQ3YTFmMjRjNzA4NDNmYmE4ZTkyMDJkNWUyZTY4OWU6NTc1ZGVlMTNmNzk4NGUwY2EwYTE4MWMwNzgzMTBkZWU=",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST"
         })
         .then(resp => resp.json())
-        .then(resp => {
-            this.props.setPlaylists(resp.playlists.items)
+        .then(data => {
+            fetch("https://api.spotify.com/v1/browse/featured-playlists?country=US&limit=8", {
+             headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${data.access_token}`,
+                "Content-Type": "application/json"
+            }
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                this.props.setPlaylists(resp.playlists.items)
+            })
         })
+        
+
     }
 
     handleNum = (e) => {
