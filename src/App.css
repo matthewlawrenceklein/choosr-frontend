@@ -260,3 +260,12 @@ turn-counter{
   border-radius: 10px;
   box-shadow: 10px 10px 32px -4px rgba(0,0,0,0.63);
 }
+
+.turn-counter{
+  width: 800px;
+  border-style: solid;
+  border-radius: 10px;
+  box-shadow: 10px 10px 32px -4px rgba(0,0,0,0.63);
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 28%, rgba(253,187,45,1) 99%);
+}

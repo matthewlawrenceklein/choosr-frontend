@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import CinemaItem from './choiceItems/CinemaItem'
 import MovieItem from './choiceItems/MovieItem'
 import FinalCuisineItem from './choiceItems/FinalCuisineItem'
+import FinalPlaylistItem from './choiceItems/FinalPlaylistItem'
 
 class ChoosieFinish extends Component {
 
@@ -24,6 +25,9 @@ class ChoosieFinish extends Component {
             case 'cinema':
                 this.handleCinema()
                 break;
+            case 'music':
+                this.handlePlaylists()
+                break; 
             default:
                 break;
         }
@@ -38,6 +42,9 @@ class ChoosieFinish extends Component {
             a[j] = x;
         }
         return a;
+    }
+    handlePlaylists = () => {
+        console.log(this.props.choiceSet[0])    
     }
 
     handleCuisine = () => {
@@ -60,7 +67,6 @@ class ChoosieFinish extends Component {
                 featured_image : featured_image, 
                 menu : menu_url
             })
-            console.log(this.state)
         })  
         
     }
@@ -86,14 +92,14 @@ class ChoosieFinish extends Component {
                                                                          location={this.state.location}
                                                                          menu={this.state.menu}
                                                                          category={this.props.choiceSet[0].name}
-              
-              
-              
               /> : null }
-
-
-
               { this.props.setCategory === 'movies' ? <MovieItem poster={this.props.choiceSet[0].poster_path} title={this.props.choiceSet[0].title}/> : null }
+
+              { this.props.setCategory === 'music' ? <FinalPlaylistItem image={this.props.choiceSet[0].images[0].url} 
+                                                                        name={this.props.choiceSet[0].name}
+                                                                        url={this.props.choiceSet[0].external_urls.spotify}
+                                                                         /> 
+                                                                        : null }
 
               { this.props.setCategory === 'cinema' ? <CinemaItem photo={this.props.choiceSet[0].photo_url} 
                                                                   title={this.props.choiceSet[0].title}

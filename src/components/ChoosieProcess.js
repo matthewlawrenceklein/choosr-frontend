@@ -169,6 +169,7 @@ class ChoosieProcess extends Component {
             .then(resp => resp.json())
             .then(resp => {
                 this.props.setPlaylists(resp.playlists.items)
+                this.props.setChoiceSet(resp.playlists.items)
             })
         })
         
