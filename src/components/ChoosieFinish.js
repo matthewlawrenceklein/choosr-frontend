@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import CinemaItem from './choiceItems/CinemaItem'
 import CuisineItem from './choiceItems/CuisineItem';
 import MovieItem from './choiceItems/MovieItem'
-
+import FinalItem from './choiceItems/FinalItem'
 
 class ChoosieFinish extends Component {
 
@@ -11,7 +11,7 @@ class ChoosieFinish extends Component {
         
         switch (this.props.setCategory) {
             case 'cuisine':
-                console.log('food')
+                this.handleCuisine()
                 break;
             case 'movies':
                 this.handleMovies()
@@ -23,6 +23,24 @@ class ChoosieFinish extends Component {
                 break;
         }
 
+    }
+    handleCuisine = () => {
+        const { lat, lng } = this.props.latLon
+        const id = parseInt(this.props.choiceSet[0].id)
+        console.log(lat, lng, id)        
+
+        fetch(`https://developers.zomato.com/api/v2.1/search?count=1&lat=${lat}&lon=${lng}&radius=10000&cuisines=${parseInt(id)}&sort=rating`, {
+        headers: {
+        Accept: "application/json",
+        "User-Key": "7b934257aa35e3ba2609e8d3443b4466"
+        }})
+        .then(resp => resp.json())
+        .then(resp => {
+            console.log(resp.restaurants[0].restaurant)
+            console.log(resp.restaurants[0].restaurant.name)
+            console.log(resp.restaurants[0].restaurant.photos_url)
+        })  
+        
     }
 
     handleMovies = () => {
@@ -38,8 +56,13 @@ class ChoosieFinish extends Component {
     render() {
 
         return (
+        <div className='container'>
           <div className='App'>
-              { this.props.setCategory === 'cuisine' ? <CuisineItem title={this.props.choiceSet[0].name} image={this.props.choiceSet[0].image}/> : null }
+              { this.props.setCategory === 'cuisine' ? <FinalItem image={this.props.choiceSet[0].image}/> : null }
+
+
+
+              {/* { this.props.setCategory === 'cuisine' ? <CuisineItem title={this.props.choiceSet[0].name} image={this.props.choiceSet[0].image}/> : null } */}
               { this.props.setCategory === 'movies' ? <MovieItem poster={this.props.choiceSet[0].poster_path} title={this.props.choiceSet[0].title}/> : null }
 
               { this.props.setCategory === 'cinema' ? <CinemaItem photo={this.props.choiceSet[0].photo_url} 
@@ -48,6 +71,7 @@ class ChoosieFinish extends Component {
                                                                   /> 
                                                                   : null }
           </div>
+        </div>
             );
     }
 }

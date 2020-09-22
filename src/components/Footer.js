@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { EmojiFrown } from 'react-bootstrap-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCodeBranch } from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 class Footer extends Component {    
     render() {
@@ -10,7 +10,7 @@ class Footer extends Component {
                 <p>made with < EmojiFrown className='footer-icon-plain'/> by matthew + marshall + gamecube    
                 
                     <a href="http://github.com/matthewlawrenceklein"> 
-                        <FontAwesomeIcon className='footer-icon' icon={faCodeBranch} />
+                        <FontAwesomeIcon className='footer-icon' icon={faGithub} />
                     </a>
                     
                 </p> 

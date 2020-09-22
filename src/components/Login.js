@@ -5,6 +5,9 @@ import "firebase/firestore"
 import { connect } from 'react-redux'
 import { setUser } from '../actions/index'
 import { loggedIn } from '../actions/index'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 
 
 
@@ -54,10 +57,9 @@ handleSignIn = (provider) => {
             <div className='login-container'>
                 <div className='login' >
                     <img className='nav-crow login-item' src={process.env.PUBLIC_URL + '/crow.png'} alt='crow'/> 
-                    <br></br>
-                    <button className='login-item' onClick={ () => this.handleSignIn(new firebase.auth.GoogleAuthProvider()) }>login with google</button>
-                    <br></br>
-                    <button className='login-item' onClick={ () => this.handleSignIn(new firebase.auth.GithubAuthProvider()) }>login with github</button>
+                    <h3>choosr</h3>
+                    <FontAwesomeIcon className='login-icon' icon={faGoogle} onClick={ () => this.handleSignIn(new firebase.auth.GoogleAuthProvider()) }/>
+                    <FontAwesomeIcon className='login-icon' icon={faGithub} onClick={ () => this.handleSignIn(new firebase.auth.GithubAuthProvider()) }/>
                 </div>
             </div>
         );

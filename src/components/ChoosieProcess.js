@@ -190,7 +190,6 @@ class ChoosieProcess extends Component {
         geocodeByAddress(address)
           .then(results => getLatLng(results[0]))
           .then(latLng => {
-              console.log('Success', latLng)
               this.props.setLatLon(latLng)
             })
           .catch(error => console.error('Error', error));

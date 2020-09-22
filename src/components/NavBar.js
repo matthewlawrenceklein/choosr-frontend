@@ -25,7 +25,7 @@ class NavBar extends Component {
                         <img src={process.env.PUBLIC_URL + '/crow.png'} alt='crow' className='nav-crow'/> 
                     </Link>
 
-                    <h4>CHOOSR</h4>
+                    {/* <h4>CHOOSR</h4> */}
                     <DoorClosed onClick={ this.handleLogOut }className='nav-icon'/> 
                 </div>
             </div>
