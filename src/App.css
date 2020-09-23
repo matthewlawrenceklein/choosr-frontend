@@ -189,6 +189,15 @@ chooser-input-form:focus{
   border-radius: 20px;
 }
 
+.chooser-input-form-steam{
+  text-align: center;
+  padding: 5px;
+  background-color: transparent;
+  font-size: 25px;
+  width: 300px;
+  border-style: solid;
+  border-radius: 20px;
+}
 
 #chooser-input-title{
   margin: 15px;

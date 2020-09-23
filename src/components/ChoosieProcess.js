@@ -25,6 +25,7 @@ class ChoosieProcess extends Component {
         numChoosers : 0,
         chooserNames : {}, 
         address : '',
+        steamID64 : ''
     }
     
     componentDidMount(){
@@ -42,11 +43,43 @@ class ChoosieProcess extends Component {
             case 'cinema': 
                 this.getCinema()
                 break 
+            case 'steam':
+                // this.getGames()
+                break 
             default:
                 break;
         }
     }
+    handleSteamID = (e) => {
+        this.setState({
+            steamID64 : e.target.value
+        })
+        console.log(this.state.steamID64)
 
+        if(this.state.steamID64.length === 17){
+            this.getGames()
+        } 
+    }
+
+    getGames = () => {      
+        
+        const key = 'FEC338C5C81D680CF8CE9FF6D4FCC1D4'
+        const proxyUrl = 'https://whispering-badlands-81738.herokuapp.com/'
+        const targetUrl = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${key}&include_appinfo=1&steamid=${this.state.steamID64}&format=json`
+
+        fetch(proxyUrl + targetUrl)
+        .then(blob => blob.json())
+        .then(data => {
+            // console.log(data.response.games);
+            const notPlayed = this.shuffle(data.response.games.filter(game => game.playtime_forever < 5))
+            let localChoiceSet = []
+            for(let i = 0; i < 8; i ++){
+                localChoiceSet.push(notPlayed[i])
+            }
+            console.log(localChoiceSet)
+        })
+    }
+    
     getMovies = () => {
         let movies = []
         fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`)
@@ -257,9 +290,14 @@ class ChoosieProcess extends Component {
               </div>
                 
                 : null  }
+
+                { this.props.setCategory === 'steam' ? 
+                        <input className='chooser-input-form-steam' type="text" placeholder='enter your steamID64' value={this.state.steamID64} onChange={this.handleSteamID}></input>
+                
+                : null }
                     <div className=''>
                         <h3 id="chooser-input-title"> How Many Choosers?</h3>
-                        <input className='chooser-input-form' type='number' max='4' placeholder='0' onChange={this.handleNum}></input>
+                        <input className='chooser-input-form' type='number' max='4' placeholder='0' onChange={ this.handleNum }></input>
                         <br></br>
                     </div>
 

@@ -49,6 +49,14 @@ class Dash extends Component {
                                   category='music'
                     />
                 </div>
+
+                <div className='choosie-card'>
+                    < ChoosieCard title='Steam Games' 
+                                  image={process.env.PUBLIC_URL + '/game.png'}
+                                  buttonText="Your Steam Library's Gems!"
+                                  category='steam'
+                    />
+                </div>
             </ReactCardCarousel>
 
             
