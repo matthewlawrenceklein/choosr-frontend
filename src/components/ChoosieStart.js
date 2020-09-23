@@ -4,16 +4,14 @@ import MovieItem from './choiceItems/MovieItem'
 import CinemaItem from './choiceItems/CinemaItem'
 import CuisineItem from './choiceItems/CuisineItem'
 import PlaylistItem from './choiceItems/PlaylistItem'
+import GameItem from './choiceItems/GameItem'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { Redirect } from "react-router-dom"
-
-
 import ChoosieTurnMechanism from './ChoosieTurnMechanism';
-
-
 
 class ChoosieStart extends Component {
 
@@ -104,6 +102,34 @@ class ChoosieStart extends Component {
             </div>
         )
     }
+
+    renderGames = () => {
+       
+        const baseURL = 'http://media.steampowered.com/steamcommunity/public/images/apps/'
+        return (
+            <div className='App'>
+                <ChoosieTurnMechanism />
+                <Container>
+                    <Row>
+                        <GameItem name={this.props.games[0].name} image={`${baseURL}${this.props.games[0].appid}/${this.props.games[0].img_logo_url}.jpg`}/>     
+                        <GameItem name={this.props.games[1].name} image={`${baseURL}${this.props.games[1].appid}/${this.props.games[1].img_logo_url}.jpg`}/>     
+                    </Row>
+                    <Row>
+                        <GameItem name={this.props.games[2].name} image={`${baseURL}${this.props.games[2].appid}/${this.props.games[2].img_logo_url}.jpg`}/>     
+                        <GameItem name={this.props.games[3].name} image={`${baseURL}${this.props.games[3].appid}/${this.props.games[3].img_logo_url}.jpg`}/>     
+                    </Row>
+                    <Row>
+                        <GameItem name={this.props.games[4].name} image={`${baseURL}${this.props.games[4].appid}/${this.props.games[4].img_logo_url}.jpg`}/>     
+                        <GameItem name={this.props.games[5].name} image={`${baseURL}${this.props.games[5].appid}/${this.props.games[5].img_logo_url}.jpg`}/>     
+                    </Row> 
+                    <Row>
+                        <GameItem name={this.props.games[6].name} image={`${baseURL}${this.props.games[6].appid}/${this.props.games[6].img_logo_url}.jpg`}/>     
+                        <GameItem name={this.props.games[7].name} image={`${baseURL}${this.props.games[7].appid}/${this.props.games[7].img_logo_url}.jpg`}/>     
+                    </Row> 
+                </Container>
+            </div>
+        )
+    }
      
 
     render() {
@@ -116,6 +142,7 @@ class ChoosieStart extends Component {
                 { this.props.setCategory === 'cinema' ? this.renderCinema() : null }
                 { this.props.setCategory === 'cuisine' ? this.renderCuisines() : null }
                 { this.props.setCategory === 'music' ? this.renderPlaylists() : null }
+                { this.props.setCategory === 'steam' ? this.renderGames() : null }
 
                 <Footer />
             </div>
@@ -133,7 +160,8 @@ const mapStateToProps = (state) => {
         playlists : state.setPlaylists, 
         latLon : state.setLatLon, 
         chooserNames : state.setChooserNames,
-        chosenCount : state.setChosenCount 
+        chosenCount : state.setChosenCount,
+        games : state.setGames
     }
 }
 

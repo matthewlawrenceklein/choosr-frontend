@@ -10,6 +10,7 @@ import setChooserNames from './setChooserNames'
 import setChosenCount from './setChosenCount'
 import setChoiceSet from './setChoiceSet'
 import setCuisines from './setCuisines'
+import setGames from './setGames'
 
 
 export default combineReducers({
@@ -23,6 +24,7 @@ export default combineReducers({
     setChooserNames,
     setChosenCount,
     setChoiceSet,
-    setCuisines 
+    setCuisines,
+    setGames  
 })
  

@@ -18,6 +18,7 @@ import { setChooserNames } from '../actions/index'
 import { setChoiceSet } from '../actions/index'
 import { setCuisines } from '../actions/index'
 import { setChosenCount } from '../actions/index'
+import { setGames } from '../actions/index'
 
 class ChoosieProcess extends Component {
 
@@ -44,7 +45,6 @@ class ChoosieProcess extends Component {
                 this.getCinema()
                 break 
             case 'steam':
-                // this.getGames()
                 break 
             default:
                 break;
@@ -54,29 +54,28 @@ class ChoosieProcess extends Component {
         this.setState({
             steamID64 : e.target.value
         })
-        console.log(this.state.steamID64)
-
-        if(this.state.steamID64.length === 17){
-            this.getGames()
-        } 
+        // console.log(this.state.steamID64)
+        // if(this.state.steamID64.length === 17){
+        //     this.getGames()
+        // } 
     }
 
     getGames = () => {      
         
-        const key = 'FEC338C5C81D680CF8CE9FF6D4FCC1D4'
+        const key = process.env.REACT_APP_STEAM_KEY
         const proxyUrl = 'https://whispering-badlands-81738.herokuapp.com/'
         const targetUrl = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${key}&include_appinfo=1&steamid=${this.state.steamID64}&format=json`
 
         fetch(proxyUrl + targetUrl)
         .then(blob => blob.json())
         .then(data => {
-            // console.log(data.response.games);
-            const notPlayed = this.shuffle(data.response.games.filter(game => game.playtime_forever < 5))
+            const notPlayed = this.shuffle(data.response.games.filter(game => game.playtime_forever < 3))
             let localChoiceSet = []
             for(let i = 0; i < 8; i ++){
                 localChoiceSet.push(notPlayed[i])
             }
-            console.log(localChoiceSet)
+            this.props.setGames(localChoiceSet)
+            this.props.setChoiceSet(localChoiceSet)
         })
     }
     
@@ -291,6 +290,7 @@ class ChoosieProcess extends Component {
                 
                 : null  }
 
+                { this.state.steamID64.length === 17 ? this.getGames() : null }
                 { this.props.setCategory === 'steam' ? 
                         <input className='chooser-input-form-steam' type="text" placeholder='enter your steamID64' value={this.state.steamID64} onChange={this.handleSteamID}></input>
                 
@@ -378,7 +378,8 @@ const mapStateToProps = (state) => {
     setLatLon,
     setChooserNames,
     setChoiceSet,
-    setChosenCount
+    setChosenCount,
+    setGames
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChoosieProcess)

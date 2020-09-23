@@ -224,14 +224,46 @@ chooser-input-form:focus{
   width: 250px;
 }
 
+.item-card-game{
+  min-width: 350px;
+  min-height: 250px;
+  text-align: center;
+  border-style: solid;
+  margin: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 32px -4px rgba(0,0,0,0.63);
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 28%, rgba(253,187,45,1) 99%);
+  width: 250px;
+}
+
 .item-card:hover{
   border-width: 6px;
   border-color: salmon;
   transition: 0.3s
 }
 
+.item-card-game:hover{
+  border-width: 6px;
+  border-color: salmon;
+  transition: 0.3s
+}
+
 .item-movie-image {
-  height: 220px;
+  height: 250px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px -4px rgba(0,0,0,0.63); 
+  transition: 0.2;
+}
+
+.game-title{
+  margin-bottom: 25px;
+}
+
+.item-game-image {
+  height: 110px;
+  margin: 10px;
   border-radius: 10px;
   box-shadow: 3px 3px 10px -4px rgba(0,0,0,0.63); 
   transition: 0.2;

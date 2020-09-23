@@ -74,3 +74,10 @@ export const setCuisines = (cuisines) => {
     setCuisines : cuisines
   }
 }
+
+export const setGames = (games) => {
+  return {
+    type: 'SET_GAMES',
+    setGames : games
+  }
+}
