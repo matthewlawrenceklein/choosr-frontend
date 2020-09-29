@@ -189,6 +189,15 @@ chooser-input-form:focus{
   border-radius: 20px;
 }
 
+#question-icon{
+  font-size: 35px;
+  color: black;
+  margin: 10px;
+}
+
+#question-icon:hover{
+  color: salmon;
+}
 .chooser-input-form-steam{
   text-align: center;
   padding: 5px;

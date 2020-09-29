@@ -6,6 +6,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
 import { ArrowRightCircle } from 'react-bootstrap-icons';
+import { QuestionCircle } from 'react-bootstrap-icons';
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
@@ -19,6 +20,7 @@ import { setChoiceSet } from '../actions/index'
 import { setCuisines } from '../actions/index'
 import { setChosenCount } from '../actions/index'
 import { setGames } from '../actions/index'
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 class ChoosieProcess extends Component {
 
@@ -26,7 +28,8 @@ class ChoosieProcess extends Component {
         numChoosers : 0,
         chooserNames : {}, 
         address : '',
-        steamID64 : ''
+        steamID64 : '',
+        gamesGotten: false 
     }
     
     componentDidMount(){
@@ -45,6 +48,7 @@ class ChoosieProcess extends Component {
                 this.getCinema()
                 break 
             case 'steam':
+                this.setState({ gamesGotten : false })
                 break 
             default:
                 break;
@@ -76,6 +80,9 @@ class ChoosieProcess extends Component {
             }
             this.props.setGames(localChoiceSet)
             this.props.setChoiceSet(localChoiceSet)
+            this.setState({
+                gamesGotten : true 
+            })
         })
     }
     
@@ -290,10 +297,12 @@ class ChoosieProcess extends Component {
                 
                 : null  }
 
-                { this.state.steamID64.length === 17 ? this.getGames() : null }
+                { this.state.steamID64.length === 17 && this.state.gamesGotten === false ? this.getGames() : null }
                 { this.props.setCategory === 'steam' ? 
-                        <input className='chooser-input-form-steam' type="text" placeholder='enter your steamID64' value={this.state.steamID64} onChange={this.handleSteamID}></input>
-                
+                       <div>
+                           <input className='chooser-input-form-steam' type="text" placeholder='enter your steamID64' value={this.state.steamID64} onChange={this.handleSteamID}></input>
+                            <a href='https://steamid.io/' target='_blank'><QuestionCircle id='question-icon'/></a>
+                       </div>
                 : null }
                     <div className=''>
                         <h3 id="chooser-input-title"> How Many Choosers?</h3>

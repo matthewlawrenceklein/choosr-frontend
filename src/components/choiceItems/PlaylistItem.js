@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { setChosenCount } from '../../actions/index'
 import { setChoiceSet } from '../../actions/index'
 
+class PlaylistItem extends Component {
 
-class CinemaItem extends Component {
     state = {
         cancelled : false 
     }
@@ -12,21 +12,19 @@ class CinemaItem extends Component {
     handleClick = () => {
         let newCount = this.props.chosenCount + 1
         this.props.setChosenCount(newCount)
-
-        let newChoiceSet = this.props.choiceSet.filter( item => item.title !== this.props.title) 
+        let newChoiceSet = this.props.choiceSet.filter( item => item.name !== this.props.name) 
         this.props.setChoiceSet(newChoiceSet)
     
         this.setState({
             cancelled : true 
         })        
     }
-
     render() {
         return (
             <div className='item-card' onClick={ this.state.cancelled ? null : this.handleClick }>
-                <h5> {this.props.title}</h5>
-                {/* <p> IMDb Rating : {this.props.rating}</p> */}
-                <img className='item-movie-image' src={this.state.cancelled? process.env.PUBLIC_URL + '/cancel.png'   : this.props.photo} alt='poster'/>
+                <h4>{this.props.name}</h4>
+                {/* <p> {this.props.description}</p> */}
+                <img src={ this.state.cancelled? process.env.PUBLIC_URL + '/cancel.png' :this.props.image } className='item-image' alt='album cover'/>
             </div>
         );
     }
@@ -44,4 +42,4 @@ const mapStateToProps = (state) => {
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CinemaItem)
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistItem)

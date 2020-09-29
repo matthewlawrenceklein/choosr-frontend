@@ -3,10 +3,16 @@ import { connect } from 'react-redux'
 import { setChosenCount } from '../../actions/index'
 import { setChoiceSet } from '../../actions/index'
 
-
-class CinemaItem extends Component {
+class GameItem extends Component {
     state = {
-        cancelled : false 
+        cancelled : false,
+        image : '' 
+    }
+
+    componentDidMount(){
+        this.setState({
+            image : this.props.image 
+        })
     }
 
     handleClick = () => {
@@ -23,15 +29,13 @@ class CinemaItem extends Component {
 
     render() {
         return (
-            <div className='item-card' onClick={ this.state.cancelled ? null : this.handleClick }>
-                <h5> {this.props.title}</h5>
-                {/* <p> IMDb Rating : {this.props.rating}</p> */}
-                <img className='item-movie-image' src={this.state.cancelled? process.env.PUBLIC_URL + '/cancel.png'   : this.props.photo} alt='poster'/>
+            <div className='item-card-game' onClick={ this.state.cancelled ? null : this.handleClick }>
+                <h3 className='game-title'> {this.props.name}</h3>
+                <img className='item-game-image' src={this.state.cancelled? process.env.PUBLIC_URL + '/cancel.png'   : this.state.image} alt='poster'/>
             </div>
         );
     }
 }
-
 const mapDispatchToProps = {
     setChosenCount,
     setChoiceSet
@@ -44,4 +48,4 @@ const mapStateToProps = (state) => {
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CinemaItem)
+export default connect(mapStateToProps, mapDispatchToProps)(GameItem)

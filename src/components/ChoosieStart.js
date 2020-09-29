@@ -9,7 +9,6 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
 import { Redirect } from "react-router-dom"
 import ChoosieTurnMechanism from './ChoosieTurnMechanism';
 
