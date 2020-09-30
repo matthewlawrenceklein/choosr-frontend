@@ -10,7 +10,7 @@ class FinalCuisineItem extends Component {
                     <h1>{this.props.name}</h1>
                     <img className='final-image' src={this.props.image} alt='food' />
                     <h5>{this.props.location}</h5>
-                    <a href={this.props.menu}>Menu</a>
+                    <a id='cuisine-menu-link' href={this.props.menu}>Menu</a>
                 </div>
             </div>
         );

@@ -22,7 +22,7 @@ class PlaylistItem extends Component {
     render() {
         return (
             <div className='item-card' onClick={ this.state.cancelled ? null : this.handleClick }>
-                <h4>{this.props.name}</h4>
+                <h4 className='playlist-title'>{this.props.name}</h4>
                 {/* <p> {this.props.description}</p> */}
                 <img src={ this.state.cancelled? process.env.PUBLIC_URL + '/cancel.png' :this.props.image } className='item-image' alt='album cover'/>
             </div>

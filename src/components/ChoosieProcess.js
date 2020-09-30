@@ -20,7 +20,6 @@ import { setChoiceSet } from '../actions/index'
 import { setCuisines } from '../actions/index'
 import { setChosenCount } from '../actions/index'
 import { setGames } from '../actions/index'
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 class ChoosieProcess extends Component {
 

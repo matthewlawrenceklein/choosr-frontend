@@ -26,7 +26,9 @@ class NavBar extends Component {
                     </Link>
 
                     {/* <h4>CHOOSR</h4> */}
-                    <DoorClosed onClick={ this.handleLogOut }className='nav-icon'/> 
+                    <Link to='/'>
+                        <DoorClosed onClick={ this.handleLogOut }className='nav-icon'/> 
+                    </Link>
                 </div>
             </div>
         );
